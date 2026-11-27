@@ -1,5 +1,5 @@
 {
-  "version": "10.7.5",
+  "version": "10.7.6",
   "file": "wariraos.html",
-  "notes": "- 版数を 10.7.5 に統一（10.7.4 残存 0件）"
+  "notes": "v10.7.6: 夜間検査の指摘を修正（GENアプリのタスクバー最小化・終了、bwSiteWatcher停止、Studioテンプレ重複、JSONガード）"
 }
