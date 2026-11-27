@@ -468,7 +468,7 @@ body.phone .modal-card{max-width:100%}
 .nc-time{font-size:10px;opacity:.5;margin-top:3px}
 body.phone .nc-panel{left:8px;right:8px;width:auto}
 
-/* ===== v10.7.4 UI見直し: スマホで崩れない/押しやすい/読みやすい ===== */
+/* ===== v10.7.5 UI見直し: スマホで崩れない/押しやすい/読みやすい ===== */
 button,.btn,.calc-btn,.win-ctrl,.unit-tab,.store-nav,.pt-color{min-height:44px}
 .btn.sm{min-height:36px}
 .win-ctrl{min-width:36px;display:flex;align-items:center;justify-content:center}
@@ -848,7 +848,7 @@ button,.btn,.calc-btn,.win-ctrl,.unit-tab,.store-nav,.pt-color{min-height:44px}
       <div id="musQueue" style="max-height:80px;overflow-y:auto;text-align:left"></div>
       <div style="margin-top:10px;text-align:left;font-size:12px;color:var(--text3);display:flex;justify-content:space-between;align-items:center"><span id="musHistLabel">最近聴いた曲:</span><button class="btn sm" onclick="musHistClear()">履歴を消す</button></div>
       <div id="musHist" style="max-height:80px;overflow-y:auto;text-align:left"></div>
-      <div style="margin-top:10px;text-align:left;font-size:12px;color:var(--text3)"><span id="musRankLabel">🏆 よく聴く曲:</span></div>
+      <div style="margin-top:10px;text-align:left;font-size:12px;color:var(--text3)"><span id="musRankLabel">🏆 よく聴く曲:</span><button class="btn sm" onclick="musPlayReset()" style="margin-left:6px">回数をリセット</button></div>
       <div id="musRank" style="max-height:100px;overflow-y:auto;text-align:left"></div>
     </div>
   </div>
@@ -896,7 +896,7 @@ button,.btn,.calc-btn,.win-ctrl,.unit-tab,.store-nav,.pt-color{min-height:44px}
       </div>
       <div class="row" style="margin-bottom:10px;gap:6px;align-items:center;justify-content:space-between;flex-wrap:wrap">
         <span id="todoStat" style="font-size:11.5px;color:rgba(255,255,255,.45)"></span>
-        <span style="display:flex;gap:6px;align-items:center"><select class="inp" id="todoViewSel" onchange="todoViewSet(this.value)" style="width:auto;padding:6px 8px;font-size:12px"><option value="all">すべて</option><option value="open">未完了</option><option value="today">今日</option><option value="over">期限切れ</option></select><select class="inp" id="todoSortSel" onchange="todoSortSet(this.value)" style="width:auto;padding:6px 8px;font-size:12px"><option value="add">追加順</option><option value="due" selected>期限順</option><option value="pri">優先度順</option></select><button class="btn sm" onclick="todoClearDone()">完了を削除</button></span>
+        <span style="display:flex;gap:6px;align-items:center"><select class="inp" id="todoViewSel" onchange="todoViewSet(this.value)" style="width:auto;padding:6px 8px;font-size:12px"><option value="all">すべて</option><option value="open">未完了</option><option value="today">今日</option><option value="over">期限切れ</option><option value="nodue">期限なし</option></select><select class="inp" id="todoSortSel" onchange="todoSortSet(this.value)" style="width:auto;padding:6px 8px;font-size:12px"><option value="add">追加順</option><option value="due" selected>期限順</option><option value="pri">優先度順</option></select><button class="btn sm" onclick="todoClearDone()">完了を削除</button></span>
       </div>
       <div id="todoRemind" onclick="todoRemindGo()" title="クリックで今日のタスクを表示" style="margin-bottom:8px;font-size:12px;cursor:pointer"></div>
       <div id="todoList"></div>
@@ -945,7 +945,7 @@ button,.btn,.calc-btn,.win-ctrl,.unit-tab,.store-nav,.pt-color{min-height:44px}
     <div class="window-header"><div class="window-title-area"><span>⌨️</span><span class="window-title-text">ターミナル</span></div>
     <div class="window-controls"><div class="win-ctrl" onclick="minimizeWindow('terminal')">−</div><div class="win-ctrl" onclick="maximizeWindow('terminal')">□</div><div class="win-ctrl close" onclick="closeWindow('terminal')">×</div></div></div>
     <div class="window-body" style="display:flex;flex-direction:column">
-      <div class="term-out" id="termOut"><div style="color:var(--accent)">wariraOS Terminal v10.7.4</div><div>'help' でコマンド一覧</div></div>
+      <div class="term-out" id="termOut"><div style="color:var(--accent)">wariraOS Terminal v10.7.5</div><div>'help' でコマンド一覧</div></div>
       <div class="term-row"><span style="color:var(--accent);font-family:Consolas">$</span><input class="term-in" id="termIn" placeholder="コマンド..." onkeypress="if(event.key==='Enter')termRun()"></div>
     </div>
   </div>
@@ -981,7 +981,8 @@ button,.btn,.calc-btn,.win-ctrl,.unit-tab,.store-nav,.pt-color{min-height:44px}
     <div class="window-body" style="padding:0"><div class="np-layout">
       <div class="np-side" id="jrSide"><input class="inp np-search" id="jrQ" placeholder="🔍 日記を検索" oninput="jrList()"><div id="jrCal" style="padding:8px 6px;border-bottom:1px solid rgba(255,255,255,.08)"></div>
       <div id="jrMoodGraph" style="padding:8px 6px;border-bottom:1px solid rgba(255,255,255,.08)"></div>
-      <div id="jrMonthChars" style="padding:8px 6px;border-bottom:1px solid rgba(255,255,255,.08)"></div></div>
+      <div id="jrMonthChars" style="padding:8px 6px;border-bottom:1px solid rgba(255,255,255,.08)"></div>
+      <div id="jrYearChars" style="padding:8px 6px;border-bottom:1px solid rgba(255,255,255,.08)"></div></div>
       <div class="np-main">
         <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
           <span id="jrDate" style="font-weight:600"></span>
@@ -1521,7 +1522,7 @@ button,.btn,.calc-btn,.win-ctrl,.unit-tab,.store-nav,.pt-color{min-height:44px}
 
 <script>
 // ============================================================
-// wariraOS v10.7.4 "Quantum" — Complete JavaScript Engine
+// wariraOS v10.7.5 "Quantum" — Complete JavaScript Engine
 // ============================================================
 var currentUser=null,isRegisterMode=false,isEditingName=false,failedAttempts={},lockoutTimer=null,audioCtx=null,taskbarState={};
 var curNoteId=null,curFileTab='home',curFilter='all',curStoreTab='all',curSetTab='personal';
@@ -2095,6 +2096,11 @@ function calEvFor(key){var ev=getEvents();if(ev[key])return ev[key];
  var rep=getEvRep(),out=null;
  Object.keys(ev).forEach(function(k){if(rep[k]&&calRepMatch(k,key,rep[k]))out=ev[k]});
  return out}
+function calDayEvents(key){var ev=getEvents(),rep=getEvRep(),tm=getEvTime(),out=[];
+ function norm(k){var p=k.split('-');return (+p[0])+'-'+(+p[1])+'-'+(+p[2])}
+ Object.keys(ev).forEach(function(k){if(!ev[k])return;if(k===key||norm(k)===norm(key)||(rep[k]&&calRepMatch(k,key,rep[k])))out.push({text:ev[k],time:tm[k]||tm[norm(k)]||null})});
+ out.sort(function(a,b){if(a.time&&b.time)return a.time<b.time?-1:a.time>b.time?1:0;if(a.time)return -1;if(b.time)return 1;return 0});
+ return out}
 function calEvKeysInMonth(y,m){var keys={},ev=getEvents(),rep=getEvRep(),days=new Date(y,m+1,0).getDate();
  Object.keys(ev).forEach(function(k){var p=k.split('-');
   if(+p[0]===y&&+p[1]-1===m)keys[k]=1;
@@ -2194,10 +2200,10 @@ else{rf.classList.add('hidden');lf.classList.remove('hidden');ia.style.display='
 if(!currentUser){var dn=document.getElementById('displayName');dn.textContent='他のユーザー';dn.classList.remove('hidden');var li=document.getElementById('loginUsernameInput');li.classList.remove('hidden');li.value=''}else selectUser(currentUser)}}
 /* ===== パスワードのハッシュ化（PBKDF2-SHA256 / 10万回） ===== */
 var todoSort='due',todoSortLoaded=false,ptTool='pen',ptHist=[],ptBase=null,lockFails=0;
-var fmCur=0,fmEdit=null,fmQuery='',fmSort='name',todoView='all';
+var fmCur=0,fmEdit=null,fmQuery='',fmSort='name',todoView='all',fmPinOnly=false;
 var fmTypeFilter='all',FM_TYPE_LBL={folder:'フォルダ',image:'画像',audio:'音楽',document:'書類'};
 function fmTypeOk(f){return fmTypeFilter==='all'||f.type===fmTypeFilter}
-var WARIRA_VERSION='10.7.4',WARIRA_GITHUB='https://github.com/wariraVisual/wariraos',WARIRA_UPDATE_URL='https://wariravisual.github.io/wariraos/version.json',updInfo=null,fmCurDummy=0;
+var WARIRA_VERSION='10.7.5',WARIRA_GITHUB='https://github.com/wariraVisual/wariraos',WARIRA_UPDATE_URL='https://wariravisual.github.io/wariraos/version.json',updInfo=null,fmCurDummy=0;
 var PM={phase:'focus',left:1500,run:false,iv:null,n:0,day:''},jrCur=null;
 function ymd(d){d=d||new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
 var PW_ITER=100000;
@@ -2793,7 +2799,7 @@ Object.assign(window.GEN_DEFS,{
 "qzyojijukugo":{t:'quiz',qs:[["「一石二鳥」の意味は？", ["一つの行いで二つの利益", "石で鳥を落とす", "二羽の鳥", "欲張ること"], 0], ["「試行錯誤」の意味は？", ["試みて失敗を繰り返し解決に近づく", "最初から成功", "諦める", "計算する"], 0], ["「自業自得」の意味は？", ["自分の行いの報いを自分が受ける", "他人に任せる", "運がいい", "努力は無駄"], 0], ["「温故知新」の意味は？", ["昔を学び新しい知識を得る", "古い物を捨てる", "温める", "知人を訪ねる"], 0], ["「切磋琢磨」の意味は？", ["仲間と競い合い高め合う", "石を磨く", "喧嘩する", "一人で悩む"], 0], ["「百発百中」の意味は？", ["よく当たる・予測が外れない", "100回失敗", "速く走る", "たくさん集める"], 0]]},
 "qzkanyouku":{t:'quiz',qs:[["「頭が上がらない」の意味は？", ["引け目を感じて対等にできない", "頭痛がする", "眠い", "背が低い"], 0], ["「耳にタコができる」の意味は？", ["同じ話を聞き飽きる", "耳が痛い", "海へ行く", "聞こえない"], 0], ["「猫の手も借りたい」の意味は？", ["非常に忙しい", "猫が好き", "手伝いを断る", "暇だ"], 0], ["「腹を割って話す」の意味は？", ["本心を打ち明ける", "お腹が痛い", "料理をする", "怒る"], 0], ["「目から鱗が落ちる」の意味は？", ["急に真実が分かって納得する", "目が疲れる", "魚を食べる", "驚いて泣く"], 0], ["「足を洗う」の意味は？", ["悪い世界・仕事から離れる", "入浴する", "川で遊ぶ", "靴を脱ぐ"], 0]]}
 });
-/* ===== v10.7.4 汎用アプリエンジン ===== */
+/* ===== v10.7.5 汎用アプリエンジン ===== */
 var genCur=null,genRootEl=null,genTimers=[],genState={};
 function genTimersClear(){genTimers.forEach(function(x){clearInterval(x);clearTimeout(x)});genTimers=[]}
 function genRoot(){return genRootEl}
@@ -2945,7 +2951,7 @@ function genInit(id,def){
  else if(def.t==='conv')genConvRun(id);
 }
 
-/* ===== v10.7.4 ゲームエンジン ===== */
+/* ===== v10.7.5 ゲームエンジン ===== */
 function genGameBox(){return gq('#g_game')}
 function genInitGame(id,def){var m=def.mode;var st=genState[id];st.gscore=0;
  if(m==='sprint')genSprintInit(id,def);else if(m==='tap')genTapInit(id,def);else if(m==='memo')genMemoInit(id,def);
@@ -3321,7 +3327,8 @@ function fmPinNoteFiles(){var ids={};fsLive().forEach(function(f){ids[f.id]=1});
  return getNotes().filter(function(n){return n.pin&&!ids[1000+n.id]}).map(function(n){return{id:1000+n.id,name:'メモ_'+n.title+'.txt',type:'document',src:'note',data:n.content,date:ymd(),mtime:Date.now(),parent:0,pinNoteId:n.id}})}
 function fmNotePin(id){var ns=getNotes();for(var i=0;i<ns.length;i++)if(1000+ns[i].id===id)return !!ns[i].pin;return false}
 function fmItems(){
- if(fmQuery){var all=fsLive().concat(fmPinNoteFiles());return fmSortList(all.filter(function(f){var hay=(f.name+' '+(FM_TYPE_LBL[f.type]||'')+' '+(f.date||'')+' '+fsPath(f.parent).map(function(x){return x.name}).join(' ')+' '+(f.type==='document'&&f.data?String(f.data).slice(0,2000):'')).toLowerCase();return hay.indexOf(fmQuery)>=0&&fmTypeOk(f)}))}
+ if(fmPinOnly&&!fmQuery)return fmSortList(fmPinNoteFiles());
+ if(fmQuery){var all=fsLive().concat(fmPinNoteFiles());return fmSortList(all.filter(function(f){var hay=(f.name+' '+(FM_TYPE_LBL[f.type]||'')+' '+(f.date||'')+' '+fsPath(f.parent).map(function(x){return x.name}).join(' ')+' '+(f.type==='document'&&f.data?String(f.data).slice(0,2000):'')).toLowerCase();return hay.indexOf(fmQuery)>=0&&fmTypeOk(f)&&(!fmPinOnly||f.src==='note')}))}
  if(curFileTab==='home')return fmSortList(fsKids(fmCur).filter(fmTypeOk));
  if(curFileTab==='recent')return fsLive().filter(function(f){return f.type!=='folder'}).sort(function(a,b){return Math.max(b.mtime,b.opened||0)-Math.max(a.mtime,a.opened||0)}).slice(0,50);
  if(curFileTab==='trash')return fsTrashRoots().sort(function(a,b){return a.trashedAt<b.trashedAt?1:-1});
@@ -3386,6 +3393,7 @@ function renderFiles(){var tool=document.getElementById('fmTool'),list=document.
  if(curFileTab==='trash'&&!fmQuery){var be=document.createElement('button');be.className='btn sm';be.textContent='ゴミ箱を空にする';be.onclick=fmEmptyTrash;bar.appendChild(be)}
  var sr=document.createElement('input');sr.className='inp';sr.id='fmSearch';sr.placeholder='🔍 名前・種類・中身で検索';sr.style.cssText='width:150px;padding:6px 10px;font-size:12px';sr.value=fmQuery;
  sr.oninput=function(){fmQuery=sr.value.trim().toLowerCase();fmRenderList()};bar.appendChild(sr);
+ var pb=document.createElement('button');pb.className='btn sm';pb.textContent=fmPinOnly?'📌 ピンのみ ✓':'📌 ピンのみ';pb.onclick=function(){fmPinOnly=!fmPinOnly;renderFiles()};bar.appendChild(pb);
  var so=document.createElement('select');so.className='inp';so.style.cssText='width:auto;padding:6px 8px;font-size:12px';
  [['name','名前順'],['date','更新順'],['size','サイズ順']].forEach(function(o){var op=document.createElement('option');op.value=o[0];op.textContent=o[1];if(fmSort===o[0])op.selected=true;so.appendChild(op)});
  so.onchange=function(){fmSort=so.value;fmRenderList()};bar.appendChild(so);
@@ -3410,6 +3418,7 @@ var rep=document.getElementById('todoRep').value||'';
 var ts=getTodos();ts.push({text:t,done:false,due:due,pri:pri,rep:rep});setTodos(ts);i.value='';loadTodos();buzz()}
 function todoSortSet(v){todoSort=v;try{localStorage.setItem(K('todosort'),v)}catch(e){}loadTodos()}
 function todoSortRows(rows){if(todoSort==='due')rows.sort(function(a,b){var ad=a.t.due||'9999',bd=b.t.due||'9999';return ad<bd?-1:ad>bd?1:a.i-b.i});else if(todoSort==='pri')rows.sort(function(a,b){return ((b.t.pri||0)-(a.t.pri||0))||(a.i-b.i)});return rows}
+function todoViewOk(t,today){if(todoView==='open')return !t.done;if(todoView==='today')return t.due===today;if(todoView==='over')return !t.done&&!!t.due&&t.due<today;if(todoView==='nodue')return !t.due;return true}
 function todoViewSet(v){todoView=v;loadTodos()}
 function todoClearDone(){var n=getTodos().filter(function(t){return t.done}).length;
 if(!n){toast('完了済みのタスクはありません','');return}
@@ -3430,7 +3439,7 @@ var doneN=ts.filter(function(t){return t.done}).length;if(st)st.textContent=ts.l
 todoRemindRender(ts,today);
 if(!ts.length){l.innerHTML='<div style="text-align:center;padding:28px;color:rgba(255,255,255,.3);font-size:12.5px">タスクがありません</div>';return}
 var rows=ts.map(function(t,i){return{t:t,i:i}});
-rows=rows.filter(function(r){var t=r.t;if(todoView==='open')return !t.done;if(todoView==='today')return t.due===today;if(todoView==='over')return !t.done&&!!t.due&&t.due<today;return true});
+rows=rows.filter(function(r){return todoViewOk(r.t,today)});
 if(!rows.length){l.innerHTML='<div style="text-align:center;padding:28px;color:rgba(255,255,255,.3);font-size:12.5px">該当するタスクがありません</div>';return}
 todoSortRows(rows);
 rows.forEach(function(r){var t=r.t,i=r.i,d=document.createElement('div'),pri=t.pri||0;
@@ -3496,7 +3505,7 @@ function jrRenderCal(){var el=document.getElementById('jrCal');if(!el)return;var
  for(var i=0;i<first;i++)h+='<div></div>';
  for(var d=1;d<=days;d++){var k=jrCalY+'-'+('0'+(jrCalM+1)).slice(-2)+'-'+('0'+d).slice(-2),has=!!o[k],today=k===ymd();
   h+='<div onclick="jrOpen(\''+k+'\')" style="cursor:pointer;padding:3px 0;border-radius:4px;'+(has?'background:rgba(0,120,212,.35);font-weight:700':'')+(today?';outline:1px solid var(--accent)':'')+'" title="'+(has?'日記あり':'')+'">'+d+(has?'<div style="font-size:7px;line-height:1;color:#7dd3fc">●</div>':'<div style="font-size:7px;line-height:1">&nbsp;</div>')+'</div>'}
- h+='</div>';el.innerHTML=h;jrMoodGraph();jrMonthCharsRender()}
+ h+='</div>';el.innerHTML=h;jrMoodGraph();jrMonthCharsRender();jrYearCharsRender()}
 var JR_MOODS=['😀','🙂','😐','😞'];
 function jrMoodGraph(){var el=document.getElementById('jrMoodGraph');if(!el)return;
  var o=jrGet(),cnt={'😀':0,'🙂':0,'😐':0,'😞':0},total=0,prefix=jrCalY+'-'+('0'+(jrCalM+1)).slice(-2)+'-';
@@ -3510,6 +3519,11 @@ function jrMonthCharsRender(){var el=document.getElementById('jrMonthChars');if(
  var o=jrGet(),total=0,days=0,prefix=jrCalY+'-'+('0'+(jrCalM+1)).slice(-2)+'-';
  Object.keys(o).forEach(function(k){if(k.indexOf(prefix)===0&&o[k]&&o[k].text){total+=String(o[k].text).length;days++}});
  el.innerHTML='<div style="font-size:11px;opacity:.6">✍️ '+(jrCalM+1)+'月の文字数：合計 '+total.toLocaleString()+'文字'+(days?'（'+days+'日分・1日平均 '+Math.round(total/days)+'文字）':'（まだありません）')+'</div>'}
+function jrYearCharsRender(){var el=document.getElementById('jrYearChars');if(!el)return;
+ var o=jrGet(),total=0,days=0,months={},prefix=jrCalY+'-';
+ Object.keys(o).forEach(function(k){if(k.indexOf(prefix)===0&&o[k]&&o[k].text){total+=String(o[k].text).length;days++;months[k.slice(0,7)]=1}});
+ var mN=Object.keys(months).length;
+ el.innerHTML='<div style="font-size:11px;opacity:.6">📖 '+jrCalY+'年の文字数：合計 '+total.toLocaleString()+'文字'+(days?'（'+days+'日分・月平均 '+Math.round(total/(mN||1))+'文字）':'（まだありません）')+'</div>'}
 function jrShow(){var o=jrGet(),e=jrCur?o[jrCur]:null,a=document.getElementById('jrArea'),m=document.getElementById('jrMood');
  document.getElementById('jrDate').textContent=jrCur||'日付を選択';
  a.value=e?(e.text||''):'';a.disabled=!jrCur;m.value=e?(e.mood||''):'';m.disabled=!jrCur;
@@ -3525,9 +3539,8 @@ function calMove(d){calM+=d;if(calM<0){calM=11;calY--}if(calM>11){calM=0;calY++}
 function calDay(k,dd){var p=k.split('-'),want=p[0]+'-'+('0'+p[1]).slice(-2)+'-'+('0'+p[2]).slice(-2);
  var ts=getTodos().filter(function(t){return t.due===want});
  var jr=jrGet()[want],el=document.getElementById('calEvent');
- var evTxt=calEvFor(want);
- var evTime=calEvTimeFor(want);
- var base=(evTxt?('📌 '+dd+'日'+(evTime?' '+evTime:'')+': '+evTxt+'  '):'')+(ts.length?('✅ ToDo: '+ts.map(function(t){return (t.done?'☑ ':'□ ')+t.text}).join(' / ')):(!evTxt?('📅 '+dd+'日の予定を入力できます（期限のあるToDoはありません）'):''));
+ var dayEvs=calDayEvents(want);
+ var base=(dayEvs.length?('📌 '+dd+'日: '+dayEvs.map(function(x){return (x.time?x.time+' ':'')+x.text}).join(' / ')+'  '):'')+(ts.length?('✅ ToDo: '+ts.map(function(t){return (t.done?'☑ ':'□ ')+t.text}).join(' / ')):(!dayEvs.length?('📅 '+dd+'日の予定を入力できます（期限のあるToDoはありません）'):''));
  var jrTxt=jr?(' 📔 '+(jr.mood||'')+' '+String(jr.text||'').split('\n')[0].slice(0,24)):'';
  el.textContent=base+jrTxt;
  if(jr){var b=document.createElement('button');b.className='btn sm';b.style.marginLeft='8px';b.textContent='📔 日記を開く';b.onclick=function(){openApp('journal');jrOpen(want)};el.appendChild(b)}}
@@ -3797,7 +3810,7 @@ function updCheck(manual){
    if(fresh&&currentUser)ncAdd('アップデート','v'+j.version+' が利用できます。再起動して更新できます')}
   else if(manual)toast('最新バージョンです','v'+WARIRA_VERSION)
  }).catch(function(){if(manual)toast('更新を確認できませんでした','オフラインか更新情報がありません')})}
-/* ===== フィードバック (v10.7.4) ===== */
+/* ===== フィードバック (v10.7.5) ===== */
 var fbOpenAt={},fbAsked={};
 function fbOpened(id){if(id&&id!=='feedback')fbOpenAt[id]=Date.now()}
 function fbGet(){try{return JSON.parse(localStorage.getItem(K('feedback'))||'[]')}catch(e){return[]}}
@@ -3996,6 +4009,7 @@ function musRankRender(){var el=document.getElementById('musRank');if(!el)return
   d.appendChild(l);d.appendChild(r);
   d.onclick=function(){var a=getSongs(),j=-1;a.forEach(function(s,k){if(s.name===x.name)j=k});if(j>=0)musSelect(j,true)};
   el.appendChild(d)})}
+function musPlayReset(){if(!Object.keys(getMusPlay()).length){toast('リセットする回数がありません','');return}uiConfirm('再生回数をすべてリセットしますか？',function(){setMusPlay({});musRankRender();toast('リセットしました','再生回数を0にしました')})}
 function musHistRender(){var el=document.getElementById('musHist');if(!el)return;musRankRender();el.innerHTML='';var h=getMusHist();
  var lb=document.getElementById('musHistLabel');if(lb)lb.textContent='最近聴いた曲'+(h.length?' ('+h.length+'件)':'')+':';
  if(!h.length){el.innerHTML='<div style="font-size:11px;color:var(--text3);padding:6px">まだ再生履歴がありません</div>';return}
@@ -5067,7 +5081,7 @@ var _errAt=0;window.addEventListener('error',function(e){var now=Date.now();if(n
 window.addEventListener('unhandledrejection',function(){var now=Date.now();if(now-_errAt<5000)return;_errAt=now;try{toast('エラーが発生しました','処理に失敗しました')}catch(_){}});
 bootSequence();
 
-/* ===== v10.7.4 新規: 家計簿 ===== */
+/* ===== v10.7.5 新規: 家計簿 ===== */
 function getKb(){try{return JSON.parse(localStorage.getItem(K('kakeibo'))||'[]')}catch(e){return[]}}
 function setKb(v){try{localStorage.setItem(K('kakeibo'),JSON.stringify(v))}catch(e){toast('保存できませんでした','容量がいっぱいです')}}
 function kbAdd(){var amt=parseInt(document.getElementById('kbAmt').value,10);if(!amt||amt<=0){toast('金額を入れてください','');return}
@@ -5079,7 +5093,7 @@ a.forEach(function(x){if(x.date.slice(0,7)!==mk)return;if(x.type==='in')inc+=x.a
 var kbmn=document.getElementById('kbMonthName');if(kbmn)kbmn.textContent=mk.replace('-','年')+'月';document.getElementById('kbBalance').textContent='¥'+(inc-out).toLocaleString();document.getElementById('kbIn').textContent='¥'+inc.toLocaleString();document.getElementById('kbOut').textContent='¥'+out.toLocaleString();
 document.getElementById('kbCats').innerHTML=Object.keys(cats).length?('<b>この月の支出内訳:</b> '+Object.keys(cats).map(function(k){return k+' ¥'+cats[k].toLocaleString()}).join(' / ')):'';
 var l=document.getElementById('kbList');l.innerHTML=a.length?a.slice(0,60).map(function(x){return '<div class="kb-item"><span>'+x.date.slice(5)+' ['+escapeHtml(x.cat)+'] '+escapeHtml(x.memo||'')+'</span><span style="color:'+(x.type==='in'?'#4ade80':'#f87171')+';font-weight:700">'+(x.type==='in'?'+':'-')+'¥'+x.amt.toLocaleString()+' <button class="btn sm" onclick="kbDel('+x.id+')">×</button></span></div>'}).join(''):'<div style="text-align:center;padding:16px;opacity:.4;font-size:12.5px">まだ記録がありません</div>'}
-/* ===== v10.7.4 新規: 読書記録 ===== */
+/* ===== v10.7.5 新規: 読書記録 ===== */
 var bkFilter='all';
 function getBk(){try{return JSON.parse(localStorage.getItem(K('books'))||'[]')}catch(e){return[]}}
 function setBk(v){try{localStorage.setItem(K('books'),JSON.stringify(v))}catch(e){}}
