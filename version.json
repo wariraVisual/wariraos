@@ -1,5 +1,5 @@
 {
-  "version": "10.6.1",
+  "version": "10.7.0",
   "file": "wariraos.html",
-  "notes": "v10.6.1: アプリ250本"
+  "notes": "v10.7.0: 更新通知をGitHub連携に（全コピーがGitHubの最新版を確認、再起動でGitHubの最新版へ更新）"
 }
