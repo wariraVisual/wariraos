@@ -468,7 +468,7 @@ body.phone .modal-card{max-width:100%}
 .nc-time{font-size:10px;opacity:.5;margin-top:3px}
 body.phone .nc-panel{left:8px;right:8px;width:auto}
 
-/* ===== v10.7.0 UI見直し: スマホで崩れない/押しやすい/読みやすい ===== */
+/* ===== v10.7.1 UI見直し: スマホで崩れない/押しやすい/読みやすい ===== */
 button,.btn,.calc-btn,.win-ctrl,.unit-tab,.store-nav,.pt-color{min-height:44px}
 .btn.sm{min-height:36px}
 .win-ctrl{min-width:36px;display:flex;align-items:center;justify-content:center}
@@ -934,7 +934,7 @@ button,.btn,.calc-btn,.win-ctrl,.unit-tab,.store-nav,.pt-color{min-height:44px}
     <div class="window-header"><div class="window-title-area"><span>⌨️</span><span class="window-title-text">ターミナル</span></div>
     <div class="window-controls"><div class="win-ctrl" onclick="minimizeWindow('terminal')">−</div><div class="win-ctrl" onclick="maximizeWindow('terminal')">□</div><div class="win-ctrl close" onclick="closeWindow('terminal')">×</div></div></div>
     <div class="window-body" style="display:flex;flex-direction:column">
-      <div class="term-out" id="termOut"><div style="color:var(--accent)">wariraOS Terminal v10.7.0</div><div>'help' でコマンド一覧</div></div>
+      <div class="term-out" id="termOut"><div style="color:var(--accent)">wariraOS Terminal v10.7.1</div><div>'help' でコマンド一覧</div></div>
       <div class="term-row"><span style="color:var(--accent);font-family:Consolas">$</span><input class="term-in" id="termIn" placeholder="コマンド..." onkeypress="if(event.key==='Enter')termRun()"></div>
     </div>
   </div>
@@ -991,7 +991,12 @@ button,.btn,.calc-btn,.win-ctrl,.unit-tab,.store-nav,.pt-color{min-height:44px}
     </div>
   </div>
 
-  <div class="app-window" id="helpWindow" style="top:90px;left:280px;width:380px;height:380px">
+  <div class="app-window" id="feedbackWindow" style="top:110px;left:320px;width:400px;height:430px">
+    <div class="window-header"><div class="window-title-area"><span>💬</span><span class="window-title-text">フィードバック</span></div>
+    <div class="window-controls"><div class="win-ctrl" onclick="minimizeWindow('feedback')">−</div><div class="win-ctrl close" onclick="closeWindow('feedback')">×</div></div></div>
+    <div class="window-body" id="fbBody" style="font-size:13px;line-height:1.7"></div>
+</div>
+<div class="app-window" id="helpWindow" style="top:90px;left:280px;width:380px;height:380px">
     <div class="window-header"><div class="window-title-area"><span>❔</span><span class="window-title-text">ヘルプ</span></div>
     <div class="window-controls"><div class="win-ctrl" onclick="minimizeWindow('help')">−</div><div class="win-ctrl close" onclick="closeWindow('help')">×</div></div></div>
     <div class="window-body" style="font-size:13px;line-height:1.7">
@@ -1503,7 +1508,7 @@ button,.btn,.calc-btn,.win-ctrl,.unit-tab,.store-nav,.pt-color{min-height:44px}
 
 <script>
 // ============================================================
-// wariraOS v10.7.0 "Quantum" — Complete JavaScript Engine
+// wariraOS v10.7.1 "Quantum" — Complete JavaScript Engine
 // ============================================================
 var currentUser=null,isRegisterMode=false,isEditingName=false,failedAttempts={},lockoutTimer=null,audioCtx=null,taskbarState={};
 var curNoteId=null,curFileTab='home',curFilter='all',curStoreTab='all',curSetTab='personal';
@@ -1523,6 +1528,7 @@ var bwHistory=[],bwHistIdx=-1,bwBookmarks=[];
 var APPS=[
  {id:'files',name:'ファイル',icon:'📁',desc:'ファイルを整理・管理',cat:'tools',core:true,dock:true},
  {id:'settings',name:'設定',icon:'⚙️',desc:'壁紙・モード等の設定',cat:'tools',core:true,dock:true},
+ {id:'feedback',name:'フィードバック',icon:'💬',desc:'アプリの評価・改善リクエスト',cat:'tools'},
  {id:'store',name:'Store',icon:'🛍️',desc:'アプリの追加と削除',cat:'tools',core:true,dock:true},
  {id:'studio',name:'Studio',icon:'🛠️',desc:'自分のアプリを作れる開発ツール',cat:'creative',core:true},
  {id:'browser',name:'ブラウザ',icon:'🌐',desc:'軽量ブラウザ（オフライン）',cat:'tools',def:true,dock:true},
@@ -2149,7 +2155,7 @@ if(!currentUser){var dn=document.getElementById('displayName');dn.textContent='�
 /* ===== パスワードのハッシュ化（PBKDF2-SHA256 / 10万回） ===== */
 var todoSort='add',ptTool='pen',ptHist=[],ptBase=null,lockFails=0;
 var fmCur=0,fmEdit=null,fmQuery='',fmSort='name',todoView='all';
-var WARIRA_VERSION='10.7.0',WARIRA_GITHUB='https://github.com/wariraVisual/wariraos',WARIRA_UPDATE_URL='https://wariravisual.github.io/wariraos/version.json',updInfo=null,fmCurDummy=0;
+var WARIRA_VERSION='10.7.1',WARIRA_GITHUB='https://github.com/wariraVisual/wariraos',WARIRA_UPDATE_URL='https://wariravisual.github.io/wariraos/version.json',updInfo=null,fmCurDummy=0;
 var PM={phase:'focus',left:1500,run:false,iv:null,n:0,day:''},jrCur=null;
 function ymd(d){d=d||new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
 var PW_ITER=100000;
@@ -2400,6 +2406,7 @@ if(id==='pigame'&&piCur===0){piNew();}
 if(id==='pwcheck')pcCheck();
 if(id==='bingo'&&!document.getElementById('bgGrid').children.length)bgNew();
 if(id==='today')tdRender();
+if(id==='feedback')fbRender();fbOpened(id);
 if(id==='weight')wtRender();
 if(id==='water')wrRender();
 if(id==='tally')tlRender();if(id==='kakeibo')kbRender();if(id==='books')bkRender();if(id==='calculator')calcHistRender();
@@ -2488,7 +2495,7 @@ function minimizeWindow(id){var ap=app(id),key=ap&&ap.custom?'custom':id;
 var w=document.getElementById(key+'Window');if(w)w.classList.remove('active');taskbarState[id]='short';refreshTaskbar();if(id==='snake')snStop()}
 function closeWindow(id){var ap=app(id),key=ap&&ap.custom?'custom':id;
 if(isPhone&&phCurApp===id)phCloseApp();
-var w=document.getElementById(key+'Window');if(w)w.classList.remove('active');delete taskbarState[id];refreshTaskbar();if(id==='snake')snStop()}
+var w=document.getElementById(key+'Window');if(w)w.classList.remove('active');fbAsk(id);delete taskbarState[id];refreshTaskbar();if(id==='snake')snStop()}
 function toggleWinFullscreen(id){var w=document.getElementById(id+'Window');if(!w)return;
  var isFs=(document.fullscreenElement===w)||(document.webkitFullscreenElement===w);
  if(isFs){(document.exitFullscreen||document.webkitExitFullscreen||function(){}).call(document)}
@@ -2744,7 +2751,7 @@ Object.assign(window.GEN_DEFS,{
 "qzyojijukugo":{t:'quiz',qs:[["「一石二鳥」の意味は？", ["一つの行いで二つの利益", "石で鳥を落とす", "二羽の鳥", "欲張ること"], 0], ["「試行錯誤」の意味は？", ["試みて失敗を繰り返し解決に近づく", "最初から成功", "諦める", "計算する"], 0], ["「自業自得」の意味は？", ["自分の行いの報いを自分が受ける", "他人に任せる", "運がいい", "努力は無駄"], 0], ["「温故知新」の意味は？", ["昔を学び新しい知識を得る", "古い物を捨てる", "温める", "知人を訪ねる"], 0], ["「切磋琢磨」の意味は？", ["仲間と競い合い高め合う", "石を磨く", "喧嘩する", "一人で悩む"], 0], ["「百発百中」の意味は？", ["よく当たる・予測が外れない", "100回失敗", "速く走る", "たくさん集める"], 0]]},
 "qzkanyouku":{t:'quiz',qs:[["「頭が上がらない」の意味は？", ["引け目を感じて対等にできない", "頭痛がする", "眠い", "背が低い"], 0], ["「耳にタコができる」の意味は？", ["同じ話を聞き飽きる", "耳が痛い", "海へ行く", "聞こえない"], 0], ["「猫の手も借りたい」の意味は？", ["非常に忙しい", "猫が好き", "手伝いを断る", "暇だ"], 0], ["「腹を割って話す」の意味は？", ["本心を打ち明ける", "お腹が痛い", "料理をする", "怒る"], 0], ["「目から鱗が落ちる」の意味は？", ["急に真実が分かって納得する", "目が疲れる", "魚を食べる", "驚いて泣く"], 0], ["「足を洗う」の意味は？", ["悪い世界・仕事から離れる", "入浴する", "川で遊ぶ", "靴を脱ぐ"], 0]]}
 });
-/* ===== v10.7.0 汎用アプリエンジン ===== */
+/* ===== v10.7.1 汎用アプリエンジン ===== */
 var genCur=null,genRootEl=null,genTimers=[],genState={};
 function genTimersClear(){genTimers.forEach(function(x){clearInterval(x);clearTimeout(x)});genTimers=[]}
 function genRoot(){return genRootEl}
@@ -2896,7 +2903,7 @@ function genInit(id,def){
  else if(def.t==='conv')genConvRun(id);
 }
 
-/* ===== v10.7.0 ゲームエンジン ===== */
+/* ===== v10.7.1 ゲームエンジン ===== */
 function genGameBox(){return gq('#g_game')}
 function genInitGame(id,def){var m=def.mode;var st=genState[id];st.gscore=0;
  if(m==='sprint')genSprintInit(id,def);else if(m==='tap')genTapInit(id,def);else if(m==='memo')genMemoInit(id,def);
@@ -3680,6 +3687,20 @@ function updCheck(manual){
    if(fresh&&currentUser)ncAdd('アップデート','v'+j.version+' が利用できます。再起動して更新できます')}
   else if(manual)toast('最新バージョンです','v'+WARIRA_VERSION)
  }).catch(function(){if(manual)toast('更新を確認できませんでした','オフラインか更新情報がありません')})}
+/* ===== フィードバック (v10.7.1) ===== */
+var fbOpenAt={},fbAsked={};
+function fbOpened(id){if(id&&id!=='feedback')fbOpenAt[id]=Date.now()}
+function fbGet(){try{return JSON.parse(localStorage.getItem(K('feedback'))||'[]')}catch(e){return[]}}
+function fbSet(a){try{localStorage.setItem(K('feedback'),JSON.stringify(a.slice(-300)))}catch(e){}}
+function fbAsk(id){try{if(!currentUser||id==='feedback'||fbAsked[id])return;var isGen=!!(window.GEN_DEFS&&GEN_DEFS[id]);var t=fbOpenAt[id];if(!isGen&&(!t||Date.now()-t<5000))return;fbAsked[id]=1;var ap=app(id);fbShowPrompt(id,ap?ap.name:id)}catch(e){}}
+function fbShowPrompt(id,name){var old=document.getElementById('fbPrompt');if(old)old.remove();var d=document.createElement('div');d.id='fbPrompt';d.style.cssText='position:fixed;left:50%;bottom:64px;transform:translateX(-50%);z-index:9600;background:#1e2530;color:#fff;border:1px solid #4a6cf7;border-radius:14px;padding:12px 16px;box-shadow:0 8px 30px rgba(0,0,0,.45);display:flex;gap:10px;align-items:center;font-size:14px;font-family:sans-serif';d.innerHTML='<span>この「'+name+'」はいかがでしたか？</span>';[['\uD83D\uDE20',1],['\uD83D\uDE10',2],['\uD83D\uDE0A',3]].forEach(function(p){var b=document.createElement('button');b.textContent=p[0];b.style.cssText='font-size:24px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.25);border-radius:10px;padding:4px 10px;cursor:pointer';b.onclick=function(){fbRate(id,p[1])};d.appendChild(b)});var x=document.createElement('button');x.textContent='\u2715';x.style.cssText='background:none;border:none;color:#aaa;font-size:14px;cursor:pointer';x.onclick=function(){d.remove()};d.appendChild(x);document.body.appendChild(d)}
+function fbRate(id,score){var a=fbGet();a.push({app:id,score:score,time:new Date().toISOString()});fbSet(a);var p=document.getElementById('fbPrompt');if(p)p.remove();toast('フィードバック','ありがとうございました！')}
+function fbSummary(){var a=fbGet(),byApp={};a.forEach(function(r){if(!byApp[r.app])byApp[r.app]={n:0,sum:0};byApp[r.app].n++;byApp[r.app].sum+=r.score});return{total:a.length,byApp:byApp,items:a}}
+function fbRender(){var el=document.getElementById('fbBody');if(!el)return;var sm=fbSummary();var faces=['','\uD83D\uDE20','\uD83D\uDE10','\uD83D\uDE0A'];var h='<div class="sec-title">アプリの評価</div>';if(!sm.total)h+='<div style="opacity:.6">まだ評価がありません。アプリを使うと、閉じた時に「いかがでしたか？」と聞きます。</div>';else{h+='<div>合計 '+sm.total+' 件の評価</div>';Object.keys(sm.byApp).forEach(function(k){var ap=app(k);var v=sm.byApp[k];h+='<div>'+(ap?ap.name:k)+'： '+faces[Math.round(v.sum/v.n)]+' 平均 '+(v.sum/v.n).toFixed(1)+'（'+v.n+'件）</div>'});h+='<div class="sec-title" style="margin-top:10px">最近の評価</div>';sm.items.slice(-10).reverse().forEach(function(r){var ap=app(r.app);h+='<div>'+(ap?ap.name:r.app)+' '+faces[r.score]+' <span style="opacity:.5;font-size:11px">'+r.time.slice(0,10)+'</span></div>'})}
+h+='<div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn primary sm" onclick="fbSendGitHub()">GitHubに送る</button><button class="btn sm" onclick="fbDownload()">JSONで保存</button><button class="btn sm" onclick="fbClear()">すべて消す</button></div><div style="opacity:.6;font-size:11.5px;margin-top:8px">「GitHubに送る」で評価が下書きされたIssueが開きます。そのまま投稿すると、くろわが読んで改善に使います。</div>';el.innerHTML=h}
+function fbSendGitHub(){var sm=fbSummary();var body='wariraOS v'+WARIRA_VERSION+' のフィードバック（合計'+sm.total+'件）\n\n```json\n'+JSON.stringify(sm,null,1)+'\n```';window.open(WARIRA_GITHUB+'/issues/new?title='+encodeURIComponent('フィードバック v'+WARIRA_VERSION)+'&body='+encodeURIComponent(body),'_blank')}
+function fbDownload(){var blob=new Blob([JSON.stringify(fbSummary(),null,1)],{type:'application/json'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='wariraos-feedback.json';a.click()}
+function fbClear(){if(confirm('評価をすべて消しますか？')){fbSet([]);fbRender()}}
 function updRestart(){try{sessionStorage.setItem('warira_updated_from',WARIRA_VERSION)}catch(e){}var P='https://wariravisual.github.io/wariraos/';if(location.href.indexOf(P)===0){location.reload()}else{location.href=P+'wariraos.html'}}
 
 function ncAdd(t,b){if(!currentUser)return;var a=ncGet();
@@ -4903,7 +4924,7 @@ var _errAt=0;window.addEventListener('error',function(e){var now=Date.now();if(n
 window.addEventListener('unhandledrejection',function(){var now=Date.now();if(now-_errAt<5000)return;_errAt=now;try{toast('エラーが発生しました','処理に失敗しました')}catch(_){}});
 bootSequence();
 
-/* ===== v10.7.0 新規: 家計簿 ===== */
+/* ===== v10.7.1 新規: 家計簿 ===== */
 function getKb(){try{return JSON.parse(localStorage.getItem(K('kakeibo'))||'[]')}catch(e){return[]}}
 function setKb(v){try{localStorage.setItem(K('kakeibo'),JSON.stringify(v))}catch(e){toast('保存できませんでした','容量がいっぱいです')}}
 function kbAdd(){var amt=parseInt(document.getElementById('kbAmt').value,10);if(!amt||amt<=0){toast('金額を入れてください','');return}
@@ -4915,7 +4936,7 @@ a.forEach(function(x){if(x.date.slice(0,7)!==mk)return;if(x.type==='in')inc+=x.a
 var kbmn=document.getElementById('kbMonthName');if(kbmn)kbmn.textContent=mk.replace('-','年')+'月';document.getElementById('kbBalance').textContent='¥'+(inc-out).toLocaleString();document.getElementById('kbIn').textContent='¥'+inc.toLocaleString();document.getElementById('kbOut').textContent='¥'+out.toLocaleString();
 document.getElementById('kbCats').innerHTML=Object.keys(cats).length?('<b>この月の支出内訳:</b> '+Object.keys(cats).map(function(k){return k+' ¥'+cats[k].toLocaleString()}).join(' / ')):'';
 var l=document.getElementById('kbList');l.innerHTML=a.length?a.slice(0,60).map(function(x){return '<div class="kb-item"><span>'+x.date.slice(5)+' ['+escapeHtml(x.cat)+'] '+escapeHtml(x.memo||'')+'</span><span style="color:'+(x.type==='in'?'#4ade80':'#f87171')+';font-weight:700">'+(x.type==='in'?'+':'-')+'¥'+x.amt.toLocaleString()+' <button class="btn sm" onclick="kbDel('+x.id+')">×</button></span></div>'}).join(''):'<div style="text-align:center;padding:16px;opacity:.4;font-size:12.5px">まだ記録がありません</div>'}
-/* ===== v10.7.0 新規: 読書記録 ===== */
+/* ===== v10.7.1 新規: 読書記録 ===== */
 var bkFilter='all';
 function getBk(){try{return JSON.parse(localStorage.getItem(K('books'))||'[]')}catch(e){return[]}}
 function setBk(v){try{localStorage.setItem(K('books'),JSON.stringify(v))}catch(e){}}
