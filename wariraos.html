@@ -468,7 +468,7 @@ body.phone .modal-card{max-width:100%}
 .nc-time{font-size:10px;opacity:.5;margin-top:3px}
 body.phone .nc-panel{left:8px;right:8px;width:auto}
 
-/* ===== v10.7.1 UI見直し: スマホで崩れない/押しやすい/読みやすい ===== */
+/* ===== v10.7.2 UI見直し: スマホで崩れない/押しやすい/読みやすい ===== */
 button,.btn,.calc-btn,.win-ctrl,.unit-tab,.store-nav,.pt-color{min-height:44px}
 .btn.sm{min-height:36px}
 .win-ctrl{min-width:36px;display:flex;align-items:center;justify-content:center}
@@ -716,6 +716,7 @@ button,.btn,.calc-btn,.win-ctrl,.unit-tab,.store-nav,.pt-color{min-height:44px}
     <div class="window-body" style="padding:0"><div class="np-layout">
       <div class="np-side" id="npSide"><input class="inp np-search" id="npSearch" placeholder="🔍 検索" oninput="loadNotes()"></div>
       <div class="np-main"><textarea class="np-area" id="npArea" placeholder="メモを入力..." oninput="saveNote()"></textarea>
+      <div style="margin-top:8px;display:flex;gap:6px;align-items:center;flex-wrap:wrap"><input class="inp" id="npTags" placeholder="タグ（カンマ区切り）" style="flex:1;min-width:120px;padding:6px 10px;font-size:12px" onchange="npSaveTags()"><span id="npTagChips" style="display:flex;gap:4px;flex-wrap:wrap"></span></div>
       <div style="margin-top:8px;display:flex;align-items:center;gap:8px"><button class="btn sm" id="npPin" onclick="npTogglePin()">📌 ピン留め</button><span style="font-size:11px;color:rgba(255,255,255,.4)" id="npStat">自動保存・ファイルにも同期</span></div></div>
     </div></div>
   </div>
@@ -842,6 +843,8 @@ button,.btn,.calc-btn,.win-ctrl,.unit-tab,.store-nav,.pt-color{min-height:44px}
       <div style="font-size:11px;color:var(--text3)">音量 <input type="range" class="q-slider" style="width:100px" min="0" max="100" value="70" oninput="setMusVol(this.value)"></div>
       <div style="margin-top:12px;text-align:left;font-size:12px;color:var(--text3)">プレイリスト:</div>
       <div id="musPlaylist" style="max-height:100px;overflow-y:auto;text-align:left"></div>
+      <div style="margin-top:10px;text-align:left;font-size:12px;color:var(--text3)" id="musQueueLabel">次に再生:</div>
+      <div id="musQueue" style="max-height:80px;overflow-y:auto;text-align:left"></div>
     </div>
   </div>
 
@@ -884,6 +887,7 @@ button,.btn,.calc-btn,.win-ctrl,.unit-tab,.store-nav,.pt-color{min-height:44px}
       <div class="row" style="margin-bottom:10px;gap:6px;flex-wrap:wrap;align-items:center">
         <input type="date" class="inp" id="todoDue" title="期限" style="flex:1;min-width:130px;width:auto;color-scheme:dark">
         <select class="inp" id="todoPri" title="優先度" style="width:auto;min-width:76px"><option value="0">低</option><option value="1" selected>中</option><option value="2">高</option></select>
+        <select class="inp" id="todoRep" title="繰り返し" style="width:auto;min-width:96px"><option value="">繰り返しなし</option><option value="daily">毎日</option><option value="weekly">毎週</option><option value="monthly">毎月</option></select>
       </div>
       <div class="row" style="margin-bottom:10px;gap:6px;align-items:center;justify-content:space-between;flex-wrap:wrap">
         <span id="todoStat" style="font-size:11.5px;color:rgba(255,255,255,.45)"></span>
@@ -900,6 +904,7 @@ button,.btn,.calc-btn,.win-ctrl,.unit-tab,.store-nav,.pt-color{min-height:44px}
       <div class="row" style="justify-content:space-between;margin-bottom:14px"><button class="btn" onclick="calMove(-1)">‹</button><h3 id="calTitle" style="font-weight:400"></h3><button class="btn" onclick="calMove(1)">›</button></div>
       <div class="cal-grid" id="calGrid"></div>
       <div style="margin-top:14px;font-size:12px;color:rgba(255,255,255,.5)" id="calEvent"></div>
+      <div style="margin-top:6px;font-size:11px;color:rgba(255,255,255,.45)">● 予定　▲ ToDo期限　📔 日記</div>
     </div>
   </div>
 
@@ -934,7 +939,7 @@ button,.btn,.calc-btn,.win-ctrl,.unit-tab,.store-nav,.pt-color{min-height:44px}
     <div class="window-header"><div class="window-title-area"><span>⌨️</span><span class="window-title-text">ターミナル</span></div>
     <div class="window-controls"><div class="win-ctrl" onclick="minimizeWindow('terminal')">−</div><div class="win-ctrl" onclick="maximizeWindow('terminal')">□</div><div class="win-ctrl close" onclick="closeWindow('terminal')">×</div></div></div>
     <div class="window-body" style="display:flex;flex-direction:column">
-      <div class="term-out" id="termOut"><div style="color:var(--accent)">wariraOS Terminal v10.7.1</div><div>'help' でコマンド一覧</div></div>
+      <div class="term-out" id="termOut"><div style="color:var(--accent)">wariraOS Terminal v10.7.2</div><div>'help' でコマンド一覧</div></div>
       <div class="term-row"><span style="color:var(--accent);font-family:Consolas">$</span><input class="term-in" id="termIn" placeholder="コマンド..." onkeypress="if(event.key==='Enter')termRun()"></div>
     </div>
   </div>
@@ -1508,10 +1513,11 @@ button,.btn,.calc-btn,.win-ctrl,.unit-tab,.store-nav,.pt-color{min-height:44px}
 
 <script>
 // ============================================================
-// wariraOS v10.7.1 "Quantum" — Complete JavaScript Engine
+// wariraOS v10.7.2 "Quantum" — Complete JavaScript Engine
 // ============================================================
 var currentUser=null,isRegisterMode=false,isEditingName=false,failedAttempts={},lockoutTimer=null,audioCtx=null,taskbarState={};
 var curNoteId=null,curFileTab='home',curFilter='all',curStoreTab='all',curSetTab='personal';
+var npTagFilter='';
 var calY,calM,musPlaying=false,musTimer=null,musIdx=0,musPos=0,musVol=70,musShuf=false,musRep='off',ptCol='#000',ptDraw=false;
 var quick={wifi:1,bt:0,night:0,focus:0},volume=70,soundOn=true,zTop=150,dragId=null,isPhone=false,phCurApp=null,msFlagMode=false;
 var tmMode_='timer',tmRun=false,tmLeft=0,tmElapsed=0,tmInt=null,tmLaps=[];
@@ -2155,7 +2161,9 @@ if(!currentUser){var dn=document.getElementById('displayName');dn.textContent='�
 /* ===== パスワードのハッシュ化（PBKDF2-SHA256 / 10万回） ===== */
 var todoSort='add',ptTool='pen',ptHist=[],ptBase=null,lockFails=0;
 var fmCur=0,fmEdit=null,fmQuery='',fmSort='name',todoView='all';
-var WARIRA_VERSION='10.7.1',WARIRA_GITHUB='https://github.com/wariraVisual/wariraos',WARIRA_UPDATE_URL='https://wariravisual.github.io/wariraos/version.json',updInfo=null,fmCurDummy=0;
+var fmTypeFilter='all',FM_TYPE_LBL={folder:'フォルダ',image:'画像',audio:'音楽',document:'書類'};
+function fmTypeOk(f){return fmTypeFilter==='all'||f.type===fmTypeFilter}
+var WARIRA_VERSION='10.7.2',WARIRA_GITHUB='https://github.com/wariraVisual/wariraos',WARIRA_UPDATE_URL='https://wariravisual.github.io/wariraos/version.json',updInfo=null,fmCurDummy=0;
 var PM={phase:'focus',left:1500,run:false,iv:null,n:0,day:''},jrCur=null;
 function ymd(d){d=d||new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
 var PW_ITER=100000;
@@ -2751,7 +2759,7 @@ Object.assign(window.GEN_DEFS,{
 "qzyojijukugo":{t:'quiz',qs:[["「一石二鳥」の意味は？", ["一つの行いで二つの利益", "石で鳥を落とす", "二羽の鳥", "欲張ること"], 0], ["「試行錯誤」の意味は？", ["試みて失敗を繰り返し解決に近づく", "最初から成功", "諦める", "計算する"], 0], ["「自業自得」の意味は？", ["自分の行いの報いを自分が受ける", "他人に任せる", "運がいい", "努力は無駄"], 0], ["「温故知新」の意味は？", ["昔を学び新しい知識を得る", "古い物を捨てる", "温める", "知人を訪ねる"], 0], ["「切磋琢磨」の意味は？", ["仲間と競い合い高め合う", "石を磨く", "喧嘩する", "一人で悩む"], 0], ["「百発百中」の意味は？", ["よく当たる・予測が外れない", "100回失敗", "速く走る", "たくさん集める"], 0]]},
 "qzkanyouku":{t:'quiz',qs:[["「頭が上がらない」の意味は？", ["引け目を感じて対等にできない", "頭痛がする", "眠い", "背が低い"], 0], ["「耳にタコができる」の意味は？", ["同じ話を聞き飽きる", "耳が痛い", "海へ行く", "聞こえない"], 0], ["「猫の手も借りたい」の意味は？", ["非常に忙しい", "猫が好き", "手伝いを断る", "暇だ"], 0], ["「腹を割って話す」の意味は？", ["本心を打ち明ける", "お腹が痛い", "料理をする", "怒る"], 0], ["「目から鱗が落ちる」の意味は？", ["急に真実が分かって納得する", "目が疲れる", "魚を食べる", "驚いて泣く"], 0], ["「足を洗う」の意味は？", ["悪い世界・仕事から離れる", "入浴する", "川で遊ぶ", "靴を脱ぐ"], 0]]}
 });
-/* ===== v10.7.1 汎用アプリエンジン ===== */
+/* ===== v10.7.2 汎用アプリエンジン ===== */
 var genCur=null,genRootEl=null,genTimers=[],genState={};
 function genTimersClear(){genTimers.forEach(function(x){clearInterval(x);clearTimeout(x)});genTimers=[]}
 function genRoot(){return genRootEl}
@@ -2903,7 +2911,7 @@ function genInit(id,def){
  else if(def.t==='conv')genConvRun(id);
 }
 
-/* ===== v10.7.1 ゲームエンジン ===== */
+/* ===== v10.7.2 ゲームエンジン ===== */
 function genGameBox(){return gq('#g_game')}
 function genInitGame(id,def){var m=def.mode;var st=genState[id];st.gscore=0;
  if(m==='sprint')genSprintInit(id,def);else if(m==='tap')genTapInit(id,def);else if(m==='memo')genMemoInit(id,def);
@@ -3115,21 +3123,32 @@ Array.prototype.slice.call(side.querySelectorAll('.np-item,.np-new,.np-empty')).
 var q=(document.getElementById('npSearch')||{value:''}).value.trim().toLowerCase();
 var nb=document.createElement('div');nb.className='np-new';nb.textContent='+ 新規';nb.onclick=newNote;side.appendChild(nb);
 var all=getNotes();
-var notes=all.filter(function(n){return !q||((n.title||'')+' '+(n.content||'')).toLowerCase().indexOf(q)>=0});
+var notes=all.filter(function(n){return !q||((n.title||'')+' '+(n.content||'')+' '+((n.tags||[]).join(' '))).toLowerCase().indexOf(q)>=0});
+notes=notes.filter(function(n){return !npTagFilter||(n.tags||[]).indexOf(npTagFilter)>=0});
 notes=notes.slice().sort(function(a,b){return (b.pin?1:0)-(a.pin?1:0)});
 notes.forEach(function(n){var d=document.createElement('div');d.className='np-item'+(curNoteId===n.id?' active':'');
 d.innerHTML='<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(n.pin?'📌 ':'')+escapeHtml(n.title)+'</span><button class="np-del" title="削除">×</button>';
 d.onclick=function(){selNote(n.id)};d.querySelector('.np-del').onclick=function(e){e.stopPropagation();delNote(n.id)};side.appendChild(d)});
 if(q&&!notes.length){var em=document.createElement('div');em.className='np-empty';em.style.cssText='font-size:11.5px;color:rgba(255,255,255,.4);padding:8px;text-align:center';em.textContent='見つかりません';side.appendChild(em)}
-if(!curNoteId&&all.length)selNote(all[0].id);else if(!all.length){curNoteId=null;document.getElementById('npArea').value=''}
-npPinUI()}
+if(!curNoteId&&all.length)selNote(all[0].id);else if(!all.length){curNoteId=null;document.getElementById('npArea').value='';document.getElementById('npTags').value=''}
+npPinUI();npTagRender()}
 function npPinUI(){var b=document.getElementById('npPin');if(!b)return;
 var n=curNoteId?getNotes().filter(function(x){return x.id===curNoteId})[0]:null;
 b.disabled=!n;b.textContent=(n&&n.pin)?'📌 ピン留め中':'📌 ピン留め';b.style.background=(n&&n.pin)?'rgba(0,120,212,.45)':''}
 function npTogglePin(){if(!curNoteId)return;var ns=getNotes(),n=ns.filter(function(x){return x.id===curNoteId})[0];if(!n)return;
 n.pin=!n.pin;setNotes(ns);syncNotes();loadNotes()}
+function npSaveTags(){if(!curNoteId)return;var ns=getNotes(),n=ns.filter(function(x){return x.id===curNoteId})[0];if(!n)return;
+var v=document.getElementById('npTags').value.split(/[,、，]/).map(function(s){return s.trim()}).filter(function(s){return s});
+n.tags=v.filter(function(s,i,a){return a.indexOf(s)===i}).slice(0,8);setNotes(ns);syncNotes();npTagRender();loadNotes()}
+function npTagRender(){var el=document.getElementById('npTagChips');if(!el)return;el.innerHTML='';
+var tags={};getNotes().forEach(function(n){(n.tags||[]).forEach(function(t){tags[t]=1})});
+Object.keys(tags).sort().forEach(function(t){var c=document.createElement('button');c.className='chip';c.textContent='#'+t;
+if(npTagFilter===t)c.style.background='rgba(0,120,212,.45)';
+c.onclick=function(){npTagFilter=npTagFilter===t?'':t;npTagRender();loadNotes()};el.appendChild(c)});
+if(npTagFilter){var x=document.createElement('button');x.className='chip';x.textContent='× クリア';x.onclick=function(){npTagFilter='';npTagRender();loadNotes()};el.appendChild(x)}}
 function selNote(id){curNoteId=id;var n=getNotes().filter(function(x){return x.id===id})[0];
-document.getElementById('npArea').value=n?n.content:'';loadNotes()}
+document.getElementById('npArea').value=n?n.content:'';
+document.getElementById('npTags').value=n&&n.tags?n.tags.join(', '):'';loadNotes()}
 function newNote(){var ns=getNotes(),id=ns.length?Math.max.apply(null,ns.map(function(n){return n.id}))+1:1;
 ns.push({id:id,title:'メモ '+id,content:''});setNotes(ns);curNoteId=id;loadNotes();syncNotes();toast('メモを作成','メモ '+id)}
 function saveNote(){if(!curNoteId)return;var ns=getNotes(),n=ns.filter(function(x){return x.id===curNoteId})[0];if(!n)return;
@@ -3189,7 +3208,7 @@ function fmtSize(n){return n>=1e6?(n/1e6).toFixed(1)+' MB':n>=1000?Math.round(n/
 function txtSize(s){return new Blob([s||'']).size}
 function fmTypeIco(f){return f.type==='folder'?'📁':f.type==='image'?'🖼️':f.type==='audio'?'🎵':'📄'}
 function setFileNav(t){document.querySelectorAll('.fm-nav').forEach(function(n){n.classList.toggle('active',n.dataset.f===t)})}
-function switchFile(t){curFileTab=t;fmEdit=null;fmQuery='';if(t==='home')fmCur=0;setFileNav(t);renderFiles()}
+function switchFile(t){curFileTab=t;fmEdit=null;fmQuery='';fmTypeFilter='all';if(t==='home')fmCur=0;setFileNav(t);renderFiles()}
 function fmGoto(id){fmCur=id;fmQuery='';fmEdit=null;curFileTab='home';setFileNav('home');renderFiles()}
 function fmReveal(id){var f=fsGet(id);if(!f)return;openApp('files');fmCur=f.parent;fmQuery='';curFileTab='home';setFileNav('home');
  fmEdit=f.type==='folder'?null:id;if(f.type==='folder'){fmCur=id}renderFiles()}
@@ -3265,8 +3284,8 @@ function fmSortList(a){var s=fmSort;return a.sort(function(x,y){
  var fx=x.type==='folder'?0:1,fy=y.type==='folder'?0:1;if(fx!==fy)return fx-fy;
  return x.name.localeCompare(y.name,'ja')})}
 function fmItems(){
- if(fmQuery)return fmSortList(fsLive().filter(function(f){return f.name.toLowerCase().indexOf(fmQuery)>=0}));
- if(curFileTab==='home')return fmSortList(fsKids(fmCur));
+ if(fmQuery)return fmSortList(fsLive().filter(function(f){var hay=(f.name+' '+(FM_TYPE_LBL[f.type]||'')+' '+(f.date||'')+' '+fsPath(f.parent).map(function(x){return x.name}).join(' ')+' '+(f.type==='document'&&f.data?String(f.data).slice(0,2000):'')).toLowerCase();return hay.indexOf(fmQuery)>=0&&fmTypeOk(f)}));
+ if(curFileTab==='home')return fmSortList(fsKids(fmCur).filter(fmTypeOk));
  if(curFileTab==='recent')return fsLive().filter(function(f){return f.type!=='folder'}).sort(function(a,b){return Math.max(b.mtime,b.opened||0)-Math.max(a.mtime,a.opened||0)}).slice(0,50);
  if(curFileTab==='trash')return fsTrashRoots().sort(function(a,b){return a.trashedAt<b.trashedAt?1:-1});
  var map={images:'image',documents:'document',music:'audio'};
@@ -3327,11 +3346,14 @@ function renderFiles(){var tool=document.getElementById('fmTool'),list=document.
   var b1=document.createElement('button');b1.className='btn sm';b1.textContent='📁 フォルダ';b1.onclick=fmNewFolder;
   var b2=document.createElement('button');b2.className='btn sm';b2.textContent='📝 テキスト';b2.onclick=fmNewText;bar.appendChild(b1);bar.appendChild(b2)}
  if(curFileTab==='trash'&&!fmQuery){var be=document.createElement('button');be.className='btn sm';be.textContent='ゴミ箱を空にする';be.onclick=fmEmptyTrash;bar.appendChild(be)}
- var sr=document.createElement('input');sr.className='inp';sr.id='fmSearch';sr.placeholder='🔍 検索';sr.style.cssText='width:150px;padding:6px 10px;font-size:12px';sr.value=fmQuery;
+ var sr=document.createElement('input');sr.className='inp';sr.id='fmSearch';sr.placeholder='🔍 名前・種類・中身で検索';sr.style.cssText='width:150px;padding:6px 10px;font-size:12px';sr.value=fmQuery;
  sr.oninput=function(){fmQuery=sr.value.trim().toLowerCase();fmRenderList()};bar.appendChild(sr);
  var so=document.createElement('select');so.className='inp';so.style.cssText='width:auto;padding:6px 8px;font-size:12px';
  [['name','名前順'],['date','更新順'],['size','サイズ順']].forEach(function(o){var op=document.createElement('option');op.value=o[0];op.textContent=o[1];if(fmSort===o[0])op.selected=true;so.appendChild(op)});
  so.onchange=function(){fmSort=so.value;fmRenderList()};bar.appendChild(so);
+ var tf=document.createElement('select');tf.className='inp';tf.style.cssText='width:auto;padding:6px 8px;font-size:12px';
+ [['all','すべての種類'],['folder','フォルダ'],['image','画像'],['document','書類'],['audio','音楽']].forEach(function(o){var op=document.createElement('option');op.value=o[0];op.textContent=o[1];if(fmTypeFilter===o[0])op.selected=true;tf.appendChild(op)});
+ tf.onchange=function(){fmTypeFilter=tf.value;fmRenderList()};bar.appendChild(tf);
  tool.appendChild(bar);
  var raw=localStorage.getItem(K('files'))||'',info=document.createElement('div');
  info.style.cssText='width:100%;font-size:11px;color:rgba(255,255,255,.4);display:flex;justify-content:space-between';
@@ -3342,9 +3364,12 @@ function renderFiles(){var tool=document.getElementById('fmTool'),list=document.
  fmRenderList()}
 
 /* ===== ToDo ===== */
+var TD_REP_LBL={daily:'🔁 毎日',weekly:'🔁 毎週',monthly:'🔁 毎月'};
+function tdNextDue(due,rep){var b=due||ymd(),p=b.split('-'),d=new Date(+p[0],+p[1]-1,+p[2]);if(rep==='daily')d.setDate(d.getDate()+1);else if(rep==='weekly')d.setDate(d.getDate()+7);else if(rep==='monthly'){var day=d.getDate();d.setMonth(d.getMonth()+1);if(d.getDate()<day)d.setDate(0)}return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
 function addTodo(){var i=document.getElementById('todoIn'),t=i.value.trim();if(!t)return;
 var due=document.getElementById('todoDue').value||'',pri=+document.getElementById('todoPri').value||0;
-var ts=getTodos();ts.push({text:t,done:false,due:due,pri:pri});setTodos(ts);i.value='';loadTodos();buzz()}
+var rep=document.getElementById('todoRep').value||'';
+var ts=getTodos();ts.push({text:t,done:false,due:due,pri:pri,rep:rep});setTodos(ts);i.value='';loadTodos();buzz()}
 function todoSortSet(v){todoSort=v;loadTodos()}
 function todoViewSet(v){todoView=v;loadTodos()}
 function todoClearDone(){var n=getTodos().filter(function(t){return t.done}).length;
@@ -3362,10 +3387,13 @@ else if(todoSort==='pri')rows.sort(function(a,b){return ((b.t.pri||0)-(a.t.pri||
 rows.forEach(function(r){var t=r.t,i=r.i,d=document.createElement('div'),pri=t.pri||0;
 var over=!t.done&&t.due&&t.due<today;
 d.className='todo-item'+(t.done?' done':'');
-var meta='<div class="todo-meta"><span class="todo-due'+(over?' over':'')+'" title="クリックで期限を変更">📅 '+(t.due?escapeHtml(t.due)+(over?'（期限切れ）':''):'期限なし')+'</span></div>';
+var repLbl=t.rep?(' <span style="opacity:.8">'+(TD_REP_LBL[t.rep]||'')+'</span>'):'';
+var meta='<div class="todo-meta"><span class="todo-due'+(over?' over':'')+'" title="クリックで期限を変更">📅 '+(t.due?escapeHtml(t.due)+(over?'（期限切れ）':''):'期限なし')+'</span>'+repLbl+'</div>';
 d.innerHTML='<div class="todo-check">'+(t.done?'✓':'')+'</div><div class="todo-main"><div class="todo-txt">'+escapeHtml(t.text)+'</div>'+meta+'</div>'+
  '<span class="todo-pri p'+pri+'">'+['低','中','高'][pri]+'</span><button class="btn sm">×</button>';
-d.querySelector('.todo-check').onclick=function(){var a=getTodos();a[i].done=!a[i].done;setTodos(a);loadTodos();buzz()};
+d.querySelector('.todo-check').onclick=function(){var a=getTodos();var wasDone=a[i].done;a[i].done=!a[i].done;
+if(a[i].done&&!wasDone&&a[i].rep){var nt={text:a[i].text,done:false,due:tdNextDue(a[i].due,a[i].rep),pri:a[i].pri||0,rep:a[i].rep};a.push(nt);toast('繰り返しタスク','次回 '+nt.due+' に新しいタスクを作りました')}
+setTodos(a);loadTodos();buzz()};
 d.querySelector('button').onclick=function(){var a=getTodos();a.splice(i,1);setTodos(a);loadTodos()};
 d.querySelector('.todo-txt').onclick=function(){uiPrompt('タスクを編集:',t.text,function(v){if(v===null)return;v=v.trim();if(!v)return;var a=getTodos();a[i].text=v;setTodos(a);loadTodos()})};
 d.querySelector('.todo-due').onclick=function(){uiPrompt('期限（YYYY-MM-DD、空欄で削除）:',t.due||'',function(v){if(v===null)return;v=v.trim();if(v&&!/^\d{4}-\d{2}-\d{2}$/.test(v)){toast('日付の形式が違います','例: 2026-12-31');return}var a=getTodos();a[i].due=v;setTodos(a);loadTodos()})};
@@ -3434,16 +3462,21 @@ function jrDel(k){uiConfirm(k+' の日記を削除しますか？',function(){va
 function calMove(d){calM+=d;if(calM<0){calM=11;calY--}if(calM>11){calM=0;calY++}renderCal()}
 function calDay(k,dd){var p=k.split('-'),want=p[0]+'-'+('0'+p[1]).slice(-2)+'-'+('0'+p[2]).slice(-2);
  var ts=getTodos().filter(function(t){return t.due===want});
- document.getElementById('calEvent').textContent=ts.length?('✅ '+dd+'日のToDo: '+ts.map(function(t){return (t.done?'☑ ':'□ ')+t.text}).join(' / ')):('📅 '+dd+'日の予定を入力できます（期限のあるToDoはありません）')}
+ var jr=jrGet()[want],el=document.getElementById('calEvent');
+ var base=ts.length?('✅ '+dd+'日のToDo: '+ts.map(function(t){return (t.done?'☑ ':'□ ')+t.text}).join(' / ')):('📅 '+dd+'日の予定を入力できます（期限のあるToDoはありません）');
+ var jrTxt=jr?(' 📔 '+(jr.mood||'')+' '+String(jr.text||'').split('\n')[0].slice(0,24)):'';
+ el.textContent=base+jrTxt;
+ if(jr){var b=document.createElement('button');b.className='btn sm';b.style.marginLeft='8px';b.textContent='📔 日記を開く';b.onclick=function(){openApp('journal');jrOpen(want)};el.appendChild(b)}}
 function renderCal(){var g=document.getElementById('calGrid');if(!g)return;
 document.getElementById('calTitle').textContent=calY+'年'+(calM+1)+'月';
 var first=new Date(calY,calM,1).getDay(),days=new Date(calY,calM+1,0).getDate(),now=new Date();
 g.innerHTML='';['日','月','火','水','木','金','土'].forEach(function(d){var c=document.createElement('div');c.className='cal-cell cal-head';c.textContent=d;g.appendChild(c)});
 for(var i=0;i<first;i++)g.appendChild(document.createElement('div'));
 var ev=getEvents(),tdk={};getTodos().forEach(function(t){if(t.due){var p=t.due.split('-');tdk[(+p[0])+'-'+(+p[1])+'-'+(+p[2])]=1}});
+var jrO=jrGet(),jrK={};Object.keys(jrO).forEach(function(k){var p=k.split('-');jrK[(+p[0])+'-'+(+p[1])+'-'+(+p[2])]=1});
 for(var d=1;d<=days;d++){var c=document.createElement('div');c.className='cal-cell';var key=calY+'-'+(calM+1)+'-'+d;
 if(d===now.getDate()&&calM===now.getMonth()&&calY===now.getFullYear())c.classList.add('cal-today');
-c.innerHTML=d+(ev[key]?'<div style="font-size:8px;color:#00d2ff">●</div>':'')+(tdk[key]?'<div style="font-size:8px;color:#ff9f43">▲</div>':'');
+c.innerHTML=d+(ev[key]?'<div style="font-size:8px;color:#00d2ff">●</div>':'')+(tdk[key]?'<div style="font-size:8px;color:#ff9f43">▲</div>':'')+(jrK[key]?'<div style="font-size:8px;color:#7dd3fc">📔</div>':'');
 c.onclick=(function(k,dd){return function(){calDay(k,dd);var e=getEvents();uiPrompt(calY+'年'+(calM+1)+'月'+dd+'日の予定:',e[k]||'',function(v){
 if(v===null)return;if(v)e[k]=v;else delete e[k];setEvents(e);renderCal();
 document.getElementById('calEvent').textContent=v?('📌 '+dd+'日: '+v):''})}})(key,d);g.appendChild(c)}}
@@ -3687,7 +3720,7 @@ function updCheck(manual){
    if(fresh&&currentUser)ncAdd('アップデート','v'+j.version+' が利用できます。再起動して更新できます')}
   else if(manual)toast('最新バージョンです','v'+WARIRA_VERSION)
  }).catch(function(){if(manual)toast('更新を確認できませんでした','オフラインか更新情報がありません')})}
-/* ===== フィードバック (v10.7.1) ===== */
+/* ===== フィードバック (v10.7.2) ===== */
 var fbOpenAt={},fbAsked={};
 function fbOpened(id){if(id&&id!=='feedback')fbOpenAt[id]=Date.now()}
 function fbGet(){try{return JSON.parse(localStorage.getItem(K('feedback'))||'[]')}catch(e){return[]}}
@@ -3870,13 +3903,20 @@ function musRepeat(){var m=['off','all','one'];musRep=m[(m.indexOf(musRep)+1)%3]
  var t=musCur();if(t&&musCtrl)musJump(musCtrl.cur()%((t.reps||4)*16));musUI()}
 function musRenderPlaylist(){var el=document.getElementById('musPlaylist');if(!el)return;el.innerHTML='';
  var a=getSongs();
- if(!a.length){el.innerHTML='<div style="font-size:11px;color:var(--text3);padding:6px">作曲アプリで曲を作ると、ここに並びます</div>';return}
+ if(!a.length){el.innerHTML='<div style="font-size:11px;color:var(--text3);padding:6px">作曲アプリで曲を作ると、ここに並びます</div>';var q0=document.getElementById('musQueue');if(q0)q0.innerHTML='';var lb0=document.getElementById('musQueueLabel');if(lb0)lb0.textContent='次に再生:';return}
  a.forEach(function(t,i){var d=document.createElement('div');
   d.style.cssText='padding:6px 10px;cursor:pointer;border-radius:6px;font-size:12px;display:flex;justify-content:space-between';
   if(i===musIdx)d.style.background='rgba(0,120,212,.2)';
   var l=document.createElement('span');l.textContent='🎵 '+t.name;
   var r=document.createElement('span');r.style.opacity='.5';r.textContent=t.bpm+' BPM';
-  d.appendChild(l);d.appendChild(r);d.onclick=function(){musSelect(i,true)};el.appendChild(d)})}
+  d.appendChild(l);d.appendChild(r);d.onclick=function(){musSelect(i,true)};el.appendChild(d)})
+var q=document.getElementById('musQueue');if(q){q.innerHTML='';
+var lb=document.getElementById('musQueueLabel');if(lb)lb.textContent='次に再生（'+(musIdx+1)+' / '+a.length+' 曲目）:';
+if(a.length>1){var idxs=[],n=a.length;
+if(musShuf){var pool=a.map(function(_,i){return i}).filter(function(i){return i!==musIdx});for(var k=0;k<Math.min(3,pool.length);k++)idxs.push(pool.splice(Math.floor(Math.random()*pool.length),1)[0])}
+else for(var k=1;k<=Math.min(3,n-1);k++)idxs.push((musIdx+k)%n);
+idxs.forEach(function(i,rank){var d=document.createElement('div');d.style.cssText='padding:5px 10px;cursor:pointer;border-radius:6px;font-size:12px;display:flex;justify-content:space-between';var l=document.createElement('span');l.textContent=(rank+1)+'. 🎵 '+a[i].name;var r=document.createElement('span');r.style.opacity='.5';r.textContent=a[i].bpm+' BPM';d.appendChild(l);d.appendChild(r);d.onclick=function(){musSelect(i,true)};q.appendChild(d)})}
+else q.innerHTML='<div style="font-size:11px;color:var(--text3);padding:6px">曲が1曲だけです</div>'}}
 var musTimerUI=setInterval(function(){if(musCtrl)musUI()},150);
 
 /* ===== 作曲アプリ ===== */
@@ -4924,7 +4964,7 @@ var _errAt=0;window.addEventListener('error',function(e){var now=Date.now();if(n
 window.addEventListener('unhandledrejection',function(){var now=Date.now();if(now-_errAt<5000)return;_errAt=now;try{toast('エラーが発生しました','処理に失敗しました')}catch(_){}});
 bootSequence();
 
-/* ===== v10.7.1 新規: 家計簿 ===== */
+/* ===== v10.7.2 新規: 家計簿 ===== */
 function getKb(){try{return JSON.parse(localStorage.getItem(K('kakeibo'))||'[]')}catch(e){return[]}}
 function setKb(v){try{localStorage.setItem(K('kakeibo'),JSON.stringify(v))}catch(e){toast('保存できませんでした','容量がいっぱいです')}}
 function kbAdd(){var amt=parseInt(document.getElementById('kbAmt').value,10);if(!amt||amt<=0){toast('金額を入れてください','');return}
@@ -4936,7 +4976,7 @@ a.forEach(function(x){if(x.date.slice(0,7)!==mk)return;if(x.type==='in')inc+=x.a
 var kbmn=document.getElementById('kbMonthName');if(kbmn)kbmn.textContent=mk.replace('-','年')+'月';document.getElementById('kbBalance').textContent='¥'+(inc-out).toLocaleString();document.getElementById('kbIn').textContent='¥'+inc.toLocaleString();document.getElementById('kbOut').textContent='¥'+out.toLocaleString();
 document.getElementById('kbCats').innerHTML=Object.keys(cats).length?('<b>この月の支出内訳:</b> '+Object.keys(cats).map(function(k){return k+' ¥'+cats[k].toLocaleString()}).join(' / ')):'';
 var l=document.getElementById('kbList');l.innerHTML=a.length?a.slice(0,60).map(function(x){return '<div class="kb-item"><span>'+x.date.slice(5)+' ['+escapeHtml(x.cat)+'] '+escapeHtml(x.memo||'')+'</span><span style="color:'+(x.type==='in'?'#4ade80':'#f87171')+';font-weight:700">'+(x.type==='in'?'+':'-')+'¥'+x.amt.toLocaleString()+' <button class="btn sm" onclick="kbDel('+x.id+')">×</button></span></div>'}).join(''):'<div style="text-align:center;padding:16px;opacity:.4;font-size:12.5px">まだ記録がありません</div>'}
-/* ===== v10.7.1 新規: 読書記録 ===== */
+/* ===== v10.7.2 新規: 読書記録 ===== */
 var bkFilter='all';
 function getBk(){try{return JSON.parse(localStorage.getItem(K('books'))||'[]')}catch(e){return[]}}
 function setBk(v){try{localStorage.setItem(K('books'),JSON.stringify(v))}catch(e){}}
