@@ -1,5 +1,5 @@
 {
-  "version": "10.7.0",
+  "version": "10.7.1",
   "file": "wariraos.html",
-  "notes": "v10.7.0: 更新通知をGitHub連携に（全コピーがGitHubの最新版を確認、再起動でGitHubの最新版へ更新）"
+  "notes": "v10.7.1: フィードバックアプリ追加（アプリを閉じると評価を聞く、GitHub Issueへ送信可）"
 }
