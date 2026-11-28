@@ -468,7 +468,7 @@ body.phone .modal-card{max-width:100%}
 .nc-time{font-size:10px;opacity:.5;margin-top:3px}
 body.phone .nc-panel{left:8px;right:8px;width:auto}
 
-/* ===== v10.7.12 UI見直し: スマホで崩れない/押しやすい/読みやすい ===== */
+/* ===== v10.7.13 UI見直し: スマホで崩れない/押しやすい/読みやすい ===== */
 button,.btn,.calc-btn,.win-ctrl,.unit-tab,.store-nav,.pt-color{min-height:44px}
 .btn.sm{min-height:36px}
 .win-ctrl{min-width:36px;display:flex;align-items:center;justify-content:center}
@@ -946,7 +946,7 @@ button,.btn,.calc-btn,.win-ctrl,.unit-tab,.store-nav,.pt-color{min-height:44px}
     <div class="window-header"><div class="window-title-area"><span>⌨️</span><span class="window-title-text">ターミナル</span></div>
     <div class="window-controls"><div class="win-ctrl" onclick="minimizeWindow('terminal')">−</div><div class="win-ctrl" onclick="maximizeWindow('terminal')">□</div><div class="win-ctrl close" onclick="closeWindow('terminal')">×</div></div></div>
     <div class="window-body" style="display:flex;flex-direction:column">
-      <div class="term-out" id="termOut"><div style="color:var(--accent)">wariraOS Terminal v10.7.12</div><div>'help' でコマンド一覧</div></div>
+      <div class="term-out" id="termOut"><div style="color:var(--accent)">wariraOS Terminal v10.7.13</div><div>'help' でコマンド一覧</div></div>
       <div class="term-row"><span style="color:var(--accent);font-family:Consolas">$</span><input class="term-in" id="termIn" placeholder="コマンド..." onkeypress="if(event.key==='Enter')termRun()"></div>
     </div>
   </div>
@@ -1524,7 +1524,7 @@ button,.btn,.calc-btn,.win-ctrl,.unit-tab,.store-nav,.pt-color{min-height:44px}
 
 <script>
 // ============================================================
-// wariraOS v10.7.12 "Quantum" — Complete JavaScript Engine
+// wariraOS v10.7.13 "Quantum" — Complete JavaScript Engine
 // ============================================================
 var currentUser=null,isRegisterMode=false,isEditingName=false,failedAttempts={},lockoutTimer=null,audioCtx=null,taskbarState={};
 var curNoteId=null,curFileTab='home',curFilter='all',curStoreTab='all',curSetTab='personal';
@@ -2207,7 +2207,7 @@ var todoSort='due',todoSortLoaded=false,ptTool='pen',ptHist=[],ptBase=null,lockF
 var fmCur=0,fmEdit=null,fmQuery='',fmSort='name',todoView='all',fmPinOnly=false,fmPinOnlyLoaded=false;
 var fmTypeFilter='all',FM_TYPE_LBL={folder:'フォルダ',image:'画像',audio:'音楽',document:'書類'};
 function fmTypeOk(f){return fmTypeFilter==='all'||f.type===fmTypeFilter}
-var WARIRA_VERSION='10.7.12',WARIRA_GITHUB='https://github.com/wariraVisual/wariraos',WARIRA_UPDATE_URL='https://wariravisual.github.io/wariraos/version.json',updInfo=null,fmCurDummy=0;
+var WARIRA_VERSION='10.7.13',WARIRA_GITHUB='https://github.com/wariraVisual/wariraos',WARIRA_UPDATE_URL='https://wariravisual.github.io/wariraos/version.json',updInfo=null,fmCurDummy=0;
 var PM={phase:'focus',left:1500,run:false,iv:null,n:0,day:''},jrCur=null;
 function ymd(d){d=d||new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
 var PW_ITER=100000;
@@ -2806,7 +2806,7 @@ Object.assign(window.GEN_DEFS,{
 "qzyojijukugo":{t:'quiz',qs:[["「一石二鳥」の意味は？", ["一つの行いで二つの利益", "石で鳥を落とす", "二羽の鳥", "欲張ること"], 0], ["「試行錯誤」の意味は？", ["試みて失敗を繰り返し解決に近づく", "最初から成功", "諦める", "計算する"], 0], ["「自業自得」の意味は？", ["自分の行いの報いを自分が受ける", "他人に任せる", "運がいい", "努力は無駄"], 0], ["「温故知新」の意味は？", ["昔を学び新しい知識を得る", "古い物を捨てる", "温める", "知人を訪ねる"], 0], ["「切磋琢磨」の意味は？", ["仲間と競い合い高め合う", "石を磨く", "喧嘩する", "一人で悩む"], 0], ["「百発百中」の意味は？", ["よく当たる・予測が外れない", "100回失敗", "速く走る", "たくさん集める"], 0]]},
 "qzkanyouku":{t:'quiz',qs:[["「頭が上がらない」の意味は？", ["引け目を感じて対等にできない", "頭痛がする", "眠い", "背が低い"], 0], ["「耳にタコができる」の意味は？", ["同じ話を聞き飽きる", "耳が痛い", "海へ行く", "聞こえない"], 0], ["「猫の手も借りたい」の意味は？", ["非常に忙しい", "猫が好き", "手伝いを断る", "暇だ"], 0], ["「腹を割って話す」の意味は？", ["本心を打ち明ける", "お腹が痛い", "料理をする", "怒る"], 0], ["「目から鱗が落ちる」の意味は？", ["急に真実が分かって納得する", "目が疲れる", "魚を食べる", "驚いて泣く"], 0], ["「足を洗う」の意味は？", ["悪い世界・仕事から離れる", "入浴する", "川で遊ぶ", "靴を脱ぐ"], 0]]}
 });
-/* ===== v10.7.12 汎用アプリエンジン ===== */
+/* ===== v10.7.13 汎用アプリエンジン ===== */
 var genCur=null,genRootEl=null,genTimers=[],genState={};
 function genTimersClear(){genTimers.forEach(function(x){clearInterval(x);clearTimeout(x)});genTimers=[]}
 function genRoot(){return genRootEl}
@@ -2828,7 +2828,7 @@ function genOpen(id){
  return true}
 function genMin(){var w=document.getElementById('genericWindow');if(w)w.classList.remove('active');if(genCur)taskbarState[genCur]='short';refreshTaskbar()}
 function genClose(){genTimersClear();var w=document.getElementById('genericWindow');if(w)w.classList.remove('active');if(genCur){delete taskbarState[genCur];genCur=null}refreshTaskbar()}
-/* ===== v10.7.12 個別作り込みアプリ (PRO) ===== */
+/* ===== v10.7.13 個別作り込みアプリ (PRO) ===== */
 function proGet(id,defv){try{var v=JSON.parse(localStorage.getItem(K('pro_'+id))||'null');return v===null?defv:v}catch(e){return defv}}
 function proSet(id,v){try{localStorage.setItem(K('pro_'+id),JSON.stringify(v))}catch(e){}}
 function proYen(n){return '¥'+Math.round(n).toLocaleString()}
@@ -3035,9 +3035,9 @@ function genRender(id,container){
  }else if(def.t==='text'){
   h+='<textarea class="inp" id="g_text" rows="7" style="width:100%;resize:vertical" placeholder="ここにテキストを入力"></textarea>';
   if(def.mode==='replace'){h+='<div class="row" style="margin-top:8px"><input class="inp" id="g_find" placeholder="探す文字" style="flex:1"><input class="inp" id="g_repl" placeholder="置き換え後" style="flex:1"></div>'}
-  h+='<button class="btn primary" style="margin-top:8px" onclick="genTextRun(\''+id+'\')">変換する</button><button class="btn" style="margin-top:8px;margin-left:6px" onclick="genTextCopy()">📋 結果をコピー</button><div id="g_textstat" style="font-size:11.5px;opacity:.6;margin-top:6px"></div><div class="card" id="g_result" style="margin-top:8px;white-space:pre-wrap;word-break:break-all;line-height:1.8;font-size:13.5px;max-height:260px;overflow-y:auto">結果がここに出ます</div>';
+  h+='<button class="btn primary" style="margin-top:8px" onclick="genTextRun(\''+id+'\')">変換する</button><button class="btn" style="margin-top:8px;margin-left:6px" onclick="genTextCopy()">📋 結果をコピー</button><div id="g_textstat" style="font-size:11.5px;opacity:.6;margin-top:6px"></div><div class="card" id="g_result" style="margin-top:8px;white-space:pre-wrap;word-break:break-all;line-height:1.8;font-size:13.5px;max-height:260px;overflow-y:auto">結果がここに出ます</div><div id="g_texthist" style="margin-top:8px"></div>';
  }else if(def.t==='quiz'){
-  h+='<div id="g_quiz"></div>';
+  h+='<div style="margin-bottom:8px"><button class="btn sm" id="g_quizweakbtn" onclick="genQuizWeakToggle(\''+id+'\')">\uD83C\uDFAF 苦手だけ出題</button></div><div id="g_quiz"></div>';
  }else if(def.t==='game'){
   h+='<div id="g_game"></div>';
  }else if(def.t==='rec'){
@@ -3086,21 +3086,29 @@ function genTextRun(id){var def=GEN_DEFS[id];var s=(gq('#g_text')||{}).value||''
    case 'slug':out=s.trim().toLowerCase().replace(/[^a-z0-9\u3040-\u30ff\u4e00-\u9faf]+/g,'-').replace(/^-+|-+$/g,'');break;
    default:out=s}
  }catch(e){out='変換できませんでした: '+e.message}
- var r=gq('#g_result');if(r)r.textContent=out;var ts=gq('#g_textstat');if(ts)ts.textContent='入力 '+s.length+'文字 → 結果 '+out.length+'文字'}
+ var r=gq('#g_result');if(r)r.textContent=out;var ts=gq('#g_textstat');if(ts)ts.textContent='入力 '+s.length+'文字 → 結果 '+out.length+'文字';genTextHistAdd(id,s,out);genTextHistRender(id)}
 function genTextCopy(){var r=gq('#g_result');var t=r?r.textContent:'';if(!t||t==='結果がここに出ます'){toast('コピーする結果がありません','');return}
  function ok(){toast('コピーしました',t.length+'文字')}
  function fbk(){var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok()}catch(e){toast('コピーできませんでした','')}try{document.body.removeChild(ta)}catch(e){}}
  if(window.navigator&&navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){fbk()})}else fbk()}
+function genTextHistGet(id){try{return JSON.parse(localStorage.getItem(K('gentext_hist_'+id))||'[]')}catch(e){return[]}}
+function genTextHistAdd(id,inp,out){var h=genTextHistGet(id);h.unshift({t:Date.now(),i:String(inp).slice(0,30),o:String(out).slice(0,30)});h=h.slice(0,5);try{localStorage.setItem(K('gentext_hist_'+id),JSON.stringify(h))}catch(e){}}
+function genTextHistRender(id){var el=gq('#g_texthist');if(!el)return;var h=genTextHistGet(id);el.innerHTML=h.length?'<div style="font-size:11.5px;opacity:.6;margin-bottom:4px">\uD83D\uDD58 変換履歴（直近'+h.length+'件）</div>'+h.map(function(x){return '<div style="font-size:12px;padding:4px 0;border-top:1px solid rgba(255,255,255,.07);line-height:1.6">「'+escapeHtml(x.i)+'」 → 「'+escapeHtml(x.o)+'」</div>'}).join(''):''}
 /* quiz */
-function genInitQuiz(id,def){var st=genState[id];st.qi=0;st.qscore=0;st.wrong=[];st.qs=def.qs.slice();for(var i=st.qs.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var tmp=st.qs[i];st.qs[i]=st.qs[j];st.qs[j]=tmp}genQuizShow(id)}
-function genQuizShow(id){var def=GEN_DEFS[id],st=genState[id],box=gq('#g_quiz');if(!box)return;
+function genQuizWeakGet(id){try{return JSON.parse(localStorage.getItem(K('genquiz_weak_'+id))||'[]')}catch(e){return[]}}
+function genQuizWeakAdd(id,q){var w=genQuizWeakGet(id);if(w.indexOf(q)<0){w.push(q);try{localStorage.setItem(K('genquiz_weak_'+id),JSON.stringify(w))}catch(e){}}}
+function genQuizWeakDel(id,q){var w=genQuizWeakGet(id).filter(function(x){return x!==q});try{localStorage.setItem(K('genquiz_weak_'+id),JSON.stringify(w))}catch(e){}}
+function genQuizWeakBtnUpdate(id){var b=gq('#g_quizweakbtn');if(!b)return;var st=genState[id]||{};var n=genQuizWeakGet(id).length;b.textContent=st.weakMode?('\uD83C\uDFAF 苦手だけ出題中（'+n+'問）・タップで全問に戻る'):('\uD83C\uDFAF 苦手だけ出題（'+n+'問）')}
+function genQuizWeakToggle(id){var st=genState[id];genInitQuiz(id,GEN_DEFS[id],!st.weakMode)}
+function genInitQuiz(id,def,weakOnly){var st=genState[id];st.qi=0;st.qscore=0;st.wrong=[];st.weakMode=!!weakOnly;var pool=def.qs.slice();if(weakOnly){var w=genQuizWeakGet(id);pool=pool.filter(function(q){return w.indexOf(q[0])>=0});if(!pool.length){toast('苦手な問題はまだありません','間違えた問題がここにたまります');st.weakMode=false;pool=def.qs.slice()}}st.qs=pool;for(var i=st.qs.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var tmp=st.qs[i];st.qs[i]=st.qs[j];st.qs[j]=tmp}genQuizShow(id)}
+function genQuizShow(id){genQuizWeakBtnUpdate(id);var def=GEN_DEFS[id],st=genState[id],box=gq('#g_quiz');if(!box)return;
  if(st.qi>=st.qs.length){var best=0;try{best=+localStorage.getItem(K('genquiz_'+id))||0;if(st.qscore>best){localStorage.setItem(K('genquiz_'+id),st.qscore);best=st.qscore}}catch(e){}
   var wl=(st.wrong||[]).length?'<div style="text-align:left;margin:0 auto 12px;max-width:420px"><div style="font-size:13px;font-weight:700;margin-bottom:6px">間違えた問題の正解</div>'+st.wrong.map(function(w){return '<div style="font-size:12.5px;padding:7px 9px;background:rgba(255,255,255,.05);border-radius:8px;margin-bottom:6px;line-height:1.6">'+escapeHtml(w.q)+'<br>正解: <b>'+escapeHtml(w.a)+'</b>（あなた: '+escapeHtml(w.mine)+'）</div>'}).join('')+'</div>':'<div style="font-size:13px;margin-bottom:12px">🎉 全問正解！</div>';
 
   box.innerHTML='<div style="text-align:center;padding:16px"><div style="font-size:30px">🏆</div><div style="font-size:19px;font-weight:800">'+st.qscore+' / '+st.qs.length+' 問正解</div><div style="font-size:12px;opacity:.6;margin:6px 0 12px">ベスト: '+best+' 問</div>'+wl+'<button class="btn primary" onclick="genInitQuiz(\''+id+'\')">もう一度（順番シャッフル）</button></div>';return}
  var q=st.qs[st.qi];
  box.innerHTML='<div style="font-size:12px;opacity:.6">第 '+(st.qi+1)+' / '+st.qs.length+' 問 ・ スコア '+st.qscore+'</div><div style="font-size:16.5px;font-weight:700;margin:10px 0 14px;line-height:1.6">'+q[0]+'</div>'+q[1].map(function(c,i){return '<button class="btn" style="display:block;width:100%;margin-bottom:8px;text-align:left;padding:12px" onclick="genQuizAns(\''+id+'\','+i+')">'+c+'</button>'}).join('')}
-function genQuizAns(id,i){var def=GEN_DEFS[id],st=genState[id],q=st.qs[st.qi];if(i===q[2]){st.qscore++;beep(980,.1)}else{beep(220,.15);st.wrong=st.wrong||[];st.wrong.push({q:q[0],a:q[1][q[2]],mine:q[1][i]})}st.qi++;genQuizShow(id)}
+function genQuizAns(id,i){var def=GEN_DEFS[id],st=genState[id],q=st.qs[st.qi];if(i===q[2]){st.qscore++;beep(980,.1);if(st.weakMode)genQuizWeakDel(id,q[0])}else{beep(220,.15);st.wrong=st.wrong||[];st.wrong.push({q:q[0],a:q[1][q[2]],mine:q[1][i]});genQuizWeakAdd(id,q[0])}st.qi++;genQuizShow(id)}
 /* rec */
 function genRecKey(id){return K('genrec_'+id)}
 function genRecGet(id){try{return JSON.parse(localStorage.getItem(genRecKey(id))||'[]')}catch(e){return[]}}
@@ -3109,12 +3117,14 @@ function genRecDel(id,rid){try{localStorage.setItem(genRecKey(id),JSON.stringify
 function genRecClear(id){try{localStorage.removeItem(genRecKey(id))}catch(e){}genRecRender(id)}
 function genRecStats(a){if(!a.length)return null;var vs=a.map(function(x){return x.val});var tot=vs.reduce(function(s,v){return s+v},0);return{n:a.length,tot:tot,avg:tot/a.length,mx:Math.max.apply(null,vs),mn:Math.min.apply(null,vs)}}
 function genRecChartHtml(id){var def=GEN_DEFS[id];if(def.mask)return'';var a=genRecGet(id).slice().reverse().slice(-7);if(a.length<2)return'';var mx=Math.max.apply(null,a.map(function(x){return x.val}));if(mx<=0)return'';return '<div style="margin-top:8px"><div style="font-size:11px;opacity:.6;margin-bottom:4px">\uD83D\uDCCA 直近'+a.length+'件の推移</div>'+a.map(function(x){var w=Math.round(x.val/mx*100);return '<div style="display:flex;align-items:center;gap:6px;font-size:11px;margin-bottom:3px"><span style="width:38px;opacity:.7">'+x.date.slice(5)+'</span><div style="flex:1;height:9px;background:rgba(255,255,255,.08);border-radius:5px;overflow:hidden"><div style="height:100%;width:'+w+'%;background:rgba(0,210,255,.65)"></div></div><span style="width:52px;text-align:right">'+x.val.toLocaleString()+'</span></div>'}).join('')+'</div>'}
+function genRecMonthlyHtml(id){var def=GEN_DEFS[id];if(def.mask)return'';var a=genRecGet(id);if(a.length<2)return'';var m={};a.forEach(function(x){var k=(x.date||'').slice(0,7);if(!k)return;if(!m[k])m[k]={n:0,tot:0};m[k].n++;m[k].tot+=x.val});var ks=Object.keys(m).sort().reverse().slice(0,6);if(ks.length<2)return'';return '<div style="margin-top:8px"><div style="font-size:11px;opacity:.6;margin-bottom:4px">\uD83D\uDCC5 月別集計（直近'+ks.length+'か月）</div>'+ks.map(function(k){var r=m[k];return '<div style="display:flex;justify-content:space-between;font-size:11.5px;padding:2px 0;border-top:1px solid rgba(255,255,255,.06)"><span>'+k+'</span><span>'+r.n+'件 ・ 合計 '+r.tot.toLocaleString()+' '+def.unit+' ・ 平均 '+(+((r.tot/r.n).toFixed(2))).toLocaleString()+'</span></div>'}).join('')+'</div>'}
 function genRecCsvText(id){var def=GEN_DEFS[id];var a=genRecGet(id);return '日付,メモ,値('+def.unit+')\n'+a.map(function(x){return x.date+',"'+String(x.label).split('"').join('""')+'",'+x.val}).join('\n')}
 function genRecCsv(id){var def=GEN_DEFS[id];if(def.mask){toast('このアプリは書き出せません','');return}var a=genRecGet(id);if(!a.length){toast('記録がありません','');return}var b=new Blob([genRecCsvText(id)],{type:'text/csv;charset=utf-8'});var u=URL.createObjectURL(b);var l=document.createElement('a');l.href=u;l.download=id+'_records.csv';l.click();setTimeout(function(){URL.revokeObjectURL(u)},1000);toast('CSVを書き出しました',a.length+'件')}
 function genRecRender(id){var def=GEN_DEFS[id];var a=genRecGet(id);var st=gq('#g_recstat'),li=gq('#g_reclist');if(!st||!li)return;
  var sg=genRecStats(a);
  st.innerHTML=a.length?('記録 <b>'+a.length+'</b> 件 ・ 合計 <b>'+(+sg.tot.toFixed(2)).toLocaleString()+' '+def.unit+'</b> ・ 平均 '+(+sg.avg.toFixed(2)).toLocaleString()+(def.mask?'':' ・ 最大 '+sg.mx.toLocaleString()+' ・ 最小 '+sg.mn.toLocaleString())):'記録がありません';
  if(!def.mask)st.innerHTML+=genRecChartHtml(id);
+ if(!def.mask)st.innerHTML+=genRecMonthlyHtml(id);
  li.innerHTML=a.length?a.slice(0,80).map(function(x){var val=def.mask?'••••':x.val.toLocaleString();return '<div class="kb-item"><span>'+x.date.slice(5)+' '+escapeHtml(x.label)+'</span><span><b>'+val+'</b> '+def.unit+' <button class="btn sm" onclick="genRecDel(\''+id+'\','+x.id+')">×</button></span></div>'}).join(''):'<div style="text-align:center;padding:14px;opacity:.4;font-size:12.5px">まだ記録がありません</div>'}
 function genWebOpen(url){openApp('browser');setTimeout(function(){try{bwVisit(url)}catch(e){}},120)}
 /* check */
@@ -3122,6 +3132,7 @@ function genCheckGet(id){try{return JSON.parse(localStorage.getItem(K('gencheck_
 function genCheckGetCustom(id){try{return JSON.parse(localStorage.getItem(K('gencheck_custom_'+id))||'[]')}catch(e){return[]}}
 function genCheckAddCustom(id){var inp=gq('#g_checknew');var v=inp?inp.value.trim():'';if(!v){toast('項目を入力してください','');return}var c=genCheckGetCustom(id);c.push(v);try{localStorage.setItem(K('gencheck_custom_'+id),JSON.stringify(c))}catch(e){}if(inp)inp.value='';genCheckRender(id)}
 function genCheckDelCustom(id,ci){var c=genCheckGetCustom(id);c.splice(ci,1);try{localStorage.setItem(K('gencheck_custom_'+id),JSON.stringify(c))}catch(e){}var s=genCheckGet(id),ns={};Object.keys(s).forEach(function(k){if(k.charAt(0)==='c'){var n=+k.slice(1);if(n<ci)ns[k]=s[k];else if(n>ci)ns['c'+(n-1)]=s[k]}else ns[k]=s[k]});try{localStorage.setItem(K('gencheck_'+id),JSON.stringify(ns))}catch(e){}genCheckRender(id)}
+function genCheckMoveCustom(id,ci,dir){var c=genCheckGetCustom(id);var ni=ci+dir;if(ni<0||ni>=c.length)return;var t=c[ci];c[ci]=c[ni];c[ni]=t;try{localStorage.setItem(K('gencheck_custom_'+id),JSON.stringify(c))}catch(e){}var s=genCheckGet(id),ns={};Object.keys(s).forEach(function(k){if(k.charAt(0)==='c'){var n=+k.slice(1);if(n===ci)ns['c'+ni]=s[k];else if(n===ni)ns['c'+ci]=s[k];else ns[k]=s[k]}else ns[k]=s[k]});try{localStorage.setItem(K('gencheck_'+id),JSON.stringify(ns))}catch(e){}genCheckRender(id)}
 function genCheckOnlyToggle(id){var st=genState[id]=genState[id]||{};st.onlyOpen=!st.onlyOpen;genCheckRender(id)}
 function genCheckRender(id){var def=GEN_DEFS[id];var s=genCheckGet(id);var box=gq('#g_checklist');if(!box)return;
  var custom=genCheckGetCustom(id);var stt=genState[id]||{};var only=!!stt.onlyOpen;
@@ -3131,7 +3142,7 @@ function genCheckRender(id){var def=GEN_DEFS[id];var s=genCheckGet(id);var box=g
  var ob=gq('#g_checkonly');if(ob)ob.textContent=only?'すべて表示':'未チェックだけ表示';
  function row(label,checked,onchg,del){return '<label class="card" style="display:flex;gap:9px;align-items:center;padding:10px 12px;margin-bottom:6px;cursor:pointer"><input type="checkbox" '+(checked?'checked':'')+' onchange="'+onchg+'"><span style="flex:1">'+label+'</span>'+(del||'')+'</label>'}
  var h=def.items.map(function(it,i){if(only&&s[i])return'';return row(it,!!s[i],"genCheckToggle(\'"+id+"\',"+i+",this.checked)",'')}).join('');
- h+=custom.map(function(it,i){if(only&&s['c'+i])return'';return row(escapeHtml(it),!!s['c'+i],"genCheckToggle(\'"+id+"\",'c"+i+"',this.checked)",'<button class="btn sm" onclick="genCheckDelCustom(\''+id+'\','+i+')">×</button>')}).join('');
+ h+=custom.map(function(it,i){if(only&&s['c'+i])return'';return row(escapeHtml(it),!!s['c'+i],"genCheckToggle(\'"+id+"\",'c"+i+"',this.checked)",'<button class="btn sm" onclick="genCheckMoveCustom(\''+id+'\','+i+',-1)">↑</button> <button class="btn sm" onclick="genCheckMoveCustom(\''+id+'\','+i+',1)">↓</button> <button class="btn sm" onclick="genCheckDelCustom(\''+id+'\','+i+')">×</button>')}).join('');
  box.innerHTML=h||'<div style="text-align:center;padding:14px;opacity:.45;font-size:12.5px">すべてチェック済みです 🎉</div>'}
 
 function genCheckToggle(id,i,on){var s=genCheckGet(id);s[i]=on;try{localStorage.setItem(K('gencheck_'+id),JSON.stringify(s))}catch(e){}genCheckRender(id)}
@@ -3139,9 +3150,11 @@ function genCheckReset(id){try{localStorage.removeItem(K('gencheck_'+id))}catch(
 /* tone */
 function genTonePlay(f){beep(f,.45);buzz(15)}
 function genToneDemo(id){var def=GEN_DEFS[id];if(!def||!def.keys)return;genTimersClear();def.keys.forEach(function(k,i){genTimers.push(setTimeout(function(){genTonePlay(k[1])},i*380))})}
+var GEN_TONE_MELODY=[0,0,4,4,5,5,4,3,3,2,2,1,1,0,0,0,4,4,5,5,4,3,3,2,2,1,1,0];
+function genToneMelody(id){var def=GEN_DEFS[id];if(!def||!def.keys||def.keys.length<6)return;genTimersClear();GEN_TONE_MELODY.forEach(function(ix,i){var k=def.keys[Math.min(ix,def.keys.length-1)];genTimers.push(setTimeout(function(){genTonePlay(k[1])},i*380))});var m=gq('#g_tonemsg');if(m)m.textContent='\uD83C\uDFB5 きらきら星を演奏中…'}
 function genInitTone(id,def){var box=gq('#g_tone');if(!box)return;var st=genState[id];
  if(def.quiz){st.tqScore=st.tqScore||0;box.innerHTML='<div style="text-align:center"><div style="font-size:14px;margin-bottom:10px">音を聞いて、名前を当てよう（スコア: <b id="g_tqs">0</b>）</div><button class="btn primary" onclick="genToneQuizPlay(\''+id+'\')">▶ 音を鳴らす</button><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:12px">'+def.keys.map(function(k){return '<button class="btn" style="padding:13px 4px" onclick="genToneQuizAns(\''+id+'\',\''+k[0]+'\')">'+k[0]+'</button>'}).join('')+'</div><div id="g_tqmsg" style="margin-top:10px;font-size:13px"></div></div>';return}
- box.innerHTML='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">'+def.keys.map(function(k){return '<button class="btn" style="padding:22px 4px;font-size:15px;font-weight:700" onclick="genTonePlay('+k[1]+')">'+k[0]+'<div style="font-size:10px;opacity:.5;font-weight:400">'+Math.round(k[1])+'Hz</div></button>'}).join('')+'</div><div style="margin-top:10px"><button class="btn" onclick="genToneDemo(\''+id+'\')">▶ 順に鳴らす（お手本）</button></div><div style="font-size:12px;opacity:.6;margin-top:10px">ボタンを押すと音が鳴ります。並べて押せば演奏できます。</div>'}
+ box.innerHTML='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">'+def.keys.map(function(k){return '<button class="btn" style="padding:22px 4px;font-size:15px;font-weight:700" onclick="genTonePlay('+k[1]+')">'+k[0]+'<div style="font-size:10px;opacity:.5;font-weight:400">'+Math.round(k[1])+'Hz</div></button>'}).join('')+'</div><div style="margin-top:10px"><button class="btn" onclick="genToneDemo(\''+id+'\')">▶ 順に鳴らす（お手本）</button> <button class="btn" style="margin-left:6px" onclick="genToneMelody(\''+id+'\')">\uD83C\uDFB5 お手本メロディー（きらきら星）</button></div><div id="g_tonemsg" style="font-size:12px;opacity:.6;margin-top:8px"></div><div style="font-size:12px;opacity:.6;margin-top:10px">ボタンを押すと音が鳴ります。並べて押せば演奏できます。</div>'}
 function genToneQuizPlay(id){var def=GEN_DEFS[id];var st=genState[id];var k=def.keys[Math.floor(Math.random()*def.keys.length)];st.tqAns=k[0];genTonePlay(k[1]);var m=gq('#g_tqmsg');if(m)m.textContent='どの音だった？'}
 function genToneQuizAns(id,name){var st=genState[id];var m=gq('#g_tqmsg');if(!st.tqAns){if(m)m.textContent='まず「音を鳴らす」を押してね';return}
  if(name===st.tqAns){st.tqScore++;beep(1200,.15);if(m)m.textContent='⭕ 正解！';var s=gq('#g_tqs');if(s)s.textContent=st.tqScore}else{beep(200,.2);if(m)m.textContent='❌ 正解は '+st.tqAns+' でした'}st.tqAns=null}
@@ -3166,13 +3179,14 @@ function genInit(id,def){
  else if(def.t==='game')genInitGame(id,def);
  else if(def.t==='rec'){var d=gq('#g_rdate');if(d)d.value=ymd();genRecRender(id)}
  else if(def.t==='calc')genCalcHistRender(id);
+ else if(def.t==='text')genTextHistRender(id);
  else if(def.t==='tone')genInitTone(id,def);
  else if(def.t==='info')genInitInfo(id,def);
  else if(def.t==='check')genCheckRender(id);
  else if(def.t==='conv')genConvRun(id);
 }
 
-/* ===== v10.7.12 ゲームエンジン ===== */
+/* ===== v10.7.13 ゲームエンジン ===== */
 function genGameBox(){return gq('#g_game')}
 function genInitGame(id,def){var m=def.mode;var st=genState[id];st.gscore=0;
  if(m==='sprint')genSprintInit(id,def);else if(m==='tap')genTapInit(id,def);else if(m==='memo')genMemoInit(id,def);
@@ -4047,7 +4061,7 @@ function updCheck(manual){
    if(fresh&&currentUser)ncAdd('アップデート','v'+j.version+' が利用できます。再起動して更新できます')}
   else if(manual)toast('最新バージョンです','v'+WARIRA_VERSION)
  }).catch(function(){if(manual)toast('更新を確認できませんでした','オフラインか更新情報がありません')})}
-/* ===== フィードバック (v10.7.12) ===== */
+/* ===== フィードバック (v10.7.13) ===== */
 var fbOpenAt={},fbAsked={};
 function fbOpened(id){if(id&&id!=='feedback')fbOpenAt[id]=Date.now()}
 function fbGet(){try{return JSON.parse(localStorage.getItem(K('feedback'))||'[]')}catch(e){return[]}}
@@ -5320,7 +5334,7 @@ var _errAt=0;window.addEventListener('error',function(e){var now=Date.now();if(n
 window.addEventListener('unhandledrejection',function(){var now=Date.now();if(now-_errAt<5000)return;_errAt=now;try{toast('エラーが発生しました','処理に失敗しました')}catch(_){}});
 bootSequence();
 
-/* ===== v10.7.12 新規: 家計簿 ===== */
+/* ===== v10.7.13 新規: 家計簿 ===== */
 function getKb(){try{return JSON.parse(localStorage.getItem(K('kakeibo'))||'[]')}catch(e){return[]}}
 function setKb(v){try{localStorage.setItem(K('kakeibo'),JSON.stringify(v))}catch(e){toast('保存できませんでした','容量がいっぱいです')}}
 function kbAdd(){var amt=parseInt(document.getElementById('kbAmt').value,10);if(!amt||amt<=0){toast('金額を入れてください','');return}
@@ -5332,7 +5346,7 @@ a.forEach(function(x){if(x.date.slice(0,7)!==mk)return;if(x.type==='in')inc+=x.a
 var kbmn=document.getElementById('kbMonthName');if(kbmn)kbmn.textContent=mk.replace('-','年')+'月';document.getElementById('kbBalance').textContent='¥'+(inc-out).toLocaleString();document.getElementById('kbIn').textContent='¥'+inc.toLocaleString();document.getElementById('kbOut').textContent='¥'+out.toLocaleString();
 document.getElementById('kbCats').innerHTML=Object.keys(cats).length?('<b>この月の支出内訳:</b> '+Object.keys(cats).map(function(k){return k+' ¥'+cats[k].toLocaleString()}).join(' / ')):'';
 var l=document.getElementById('kbList');l.innerHTML=a.length?a.slice(0,60).map(function(x){return '<div class="kb-item"><span>'+x.date.slice(5)+' ['+escapeHtml(x.cat)+'] '+escapeHtml(x.memo||'')+'</span><span style="color:'+(x.type==='in'?'#4ade80':'#f87171')+';font-weight:700">'+(x.type==='in'?'+':'-')+'¥'+x.amt.toLocaleString()+' <button class="btn sm" onclick="kbDel('+x.id+')">×</button></span></div>'}).join(''):'<div style="text-align:center;padding:16px;opacity:.4;font-size:12.5px">まだ記録がありません</div>'}
-/* ===== v10.7.12 新規: 読書記録 ===== */
+/* ===== v10.7.13 新規: 読書記録 ===== */
 var bkFilter='all';
 function getBk(){try{return JSON.parse(localStorage.getItem(K('books'))||'[]')}catch(e){return[]}}
 function setBk(v){try{localStorage.setItem(K('books'),JSON.stringify(v))}catch(e){}}
