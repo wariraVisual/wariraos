@@ -27,9 +27,10 @@
 <script>
 window.addEventListener('load', function () {
   var st = document.getElementById('st');
+  window.addEventListener('error', function (e) { st.textContent = 'エラー: ' + (e.message || '読み込み失敗'); }, true);
   var Starter = window.V86 || window.V86Starter;
   if (!Starter) { st.textContent = 'v86の読み込みに失敗しました（ネット接続を確認してください）'; return; }
-  st.textContent = 'Linuxイメージを取得中…（約7MB）';
+  st.textContent = 'Linuxイメージを取得中…（約6.5MB）';
   try {
     var emu = new Starter({
       wasm_path: 'https://cdn.jsdelivr.net/npm/v86@0.5.494/build/v86.wasm',
@@ -38,7 +39,7 @@ window.addEventListener('load', function () {
       screen_container: document.getElementById('screen'),
       bios: { url: 'https://cdn.jsdelivr.net/gh/copy/v86@master/bios/seabios.bin' },
       vga_bios: { url: 'https://cdn.jsdelivr.net/gh/copy/v86@master/bios/vgabios.bin' },
-      cdrom: { url: 'https://i.copy.sh/linux.iso' },
+      cdrom: { url: 'linux.iso' },
       autostart: true
     });
     emu.add_listener('emulator-ready', function () { st.textContent = '起動中…'; });
