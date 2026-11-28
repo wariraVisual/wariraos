@@ -468,7 +468,7 @@ body.phone .modal-card{max-width:100%}
 .nc-time{font-size:10px;opacity:.5;margin-top:3px}
 body.phone .nc-panel{left:8px;right:8px;width:auto}
 
-/* ===== v10.7.10 UI見直し: スマホで崩れない/押しやすい/読みやすい ===== */
+/* ===== v10.7.11 UI見直し: スマホで崩れない/押しやすい/読みやすい ===== */
 button,.btn,.calc-btn,.win-ctrl,.unit-tab,.store-nav,.pt-color{min-height:44px}
 .btn.sm{min-height:36px}
 .win-ctrl{min-width:36px;display:flex;align-items:center;justify-content:center}
@@ -946,7 +946,7 @@ button,.btn,.calc-btn,.win-ctrl,.unit-tab,.store-nav,.pt-color{min-height:44px}
     <div class="window-header"><div class="window-title-area"><span>⌨️</span><span class="window-title-text">ターミナル</span></div>
     <div class="window-controls"><div class="win-ctrl" onclick="minimizeWindow('terminal')">−</div><div class="win-ctrl" onclick="maximizeWindow('terminal')">□</div><div class="win-ctrl close" onclick="closeWindow('terminal')">×</div></div></div>
     <div class="window-body" style="display:flex;flex-direction:column">
-      <div class="term-out" id="termOut"><div style="color:var(--accent)">wariraOS Terminal v10.7.10</div><div>'help' でコマンド一覧</div></div>
+      <div class="term-out" id="termOut"><div style="color:var(--accent)">wariraOS Terminal v10.7.11</div><div>'help' でコマンド一覧</div></div>
       <div class="term-row"><span style="color:var(--accent);font-family:Consolas">$</span><input class="term-in" id="termIn" placeholder="コマンド..." onkeypress="if(event.key==='Enter')termRun()"></div>
     </div>
   </div>
@@ -1524,7 +1524,7 @@ button,.btn,.calc-btn,.win-ctrl,.unit-tab,.store-nav,.pt-color{min-height:44px}
 
 <script>
 // ============================================================
-// wariraOS v10.7.10 "Quantum" — Complete JavaScript Engine
+// wariraOS v10.7.11 "Quantum" — Complete JavaScript Engine
 // ============================================================
 var currentUser=null,isRegisterMode=false,isEditingName=false,failedAttempts={},lockoutTimer=null,audioCtx=null,taskbarState={};
 var curNoteId=null,curFileTab='home',curFilter='all',curStoreTab='all',curSetTab='personal';
@@ -2207,7 +2207,7 @@ var todoSort='due',todoSortLoaded=false,ptTool='pen',ptHist=[],ptBase=null,lockF
 var fmCur=0,fmEdit=null,fmQuery='',fmSort='name',todoView='all',fmPinOnly=false,fmPinOnlyLoaded=false;
 var fmTypeFilter='all',FM_TYPE_LBL={folder:'フォルダ',image:'画像',audio:'音楽',document:'書類'};
 function fmTypeOk(f){return fmTypeFilter==='all'||f.type===fmTypeFilter}
-var WARIRA_VERSION='10.7.10',WARIRA_GITHUB='https://github.com/wariraVisual/wariraos',WARIRA_UPDATE_URL='https://wariravisual.github.io/wariraos/version.json',updInfo=null,fmCurDummy=0;
+var WARIRA_VERSION='10.7.11',WARIRA_GITHUB='https://github.com/wariraVisual/wariraos',WARIRA_UPDATE_URL='https://wariravisual.github.io/wariraos/version.json',updInfo=null,fmCurDummy=0;
 var PM={phase:'focus',left:1500,run:false,iv:null,n:0,day:''},jrCur=null;
 function ymd(d){d=d||new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
 var PW_ITER=100000;
@@ -2806,7 +2806,7 @@ Object.assign(window.GEN_DEFS,{
 "qzyojijukugo":{t:'quiz',qs:[["「一石二鳥」の意味は？", ["一つの行いで二つの利益", "石で鳥を落とす", "二羽の鳥", "欲張ること"], 0], ["「試行錯誤」の意味は？", ["試みて失敗を繰り返し解決に近づく", "最初から成功", "諦める", "計算する"], 0], ["「自業自得」の意味は？", ["自分の行いの報いを自分が受ける", "他人に任せる", "運がいい", "努力は無駄"], 0], ["「温故知新」の意味は？", ["昔を学び新しい知識を得る", "古い物を捨てる", "温める", "知人を訪ねる"], 0], ["「切磋琢磨」の意味は？", ["仲間と競い合い高め合う", "石を磨く", "喧嘩する", "一人で悩む"], 0], ["「百発百中」の意味は？", ["よく当たる・予測が外れない", "100回失敗", "速く走る", "たくさん集める"], 0]]},
 "qzkanyouku":{t:'quiz',qs:[["「頭が上がらない」の意味は？", ["引け目を感じて対等にできない", "頭痛がする", "眠い", "背が低い"], 0], ["「耳にタコができる」の意味は？", ["同じ話を聞き飽きる", "耳が痛い", "海へ行く", "聞こえない"], 0], ["「猫の手も借りたい」の意味は？", ["非常に忙しい", "猫が好き", "手伝いを断る", "暇だ"], 0], ["「腹を割って話す」の意味は？", ["本心を打ち明ける", "お腹が痛い", "料理をする", "怒る"], 0], ["「目から鱗が落ちる」の意味は？", ["急に真実が分かって納得する", "目が疲れる", "魚を食べる", "驚いて泣く"], 0], ["「足を洗う」の意味は？", ["悪い世界・仕事から離れる", "入浴する", "川で遊ぶ", "靴を脱ぐ"], 0]]}
 });
-/* ===== v10.7.10 汎用アプリエンジン ===== */
+/* ===== v10.7.11 汎用アプリエンジン ===== */
 var genCur=null,genRootEl=null,genTimers=[],genState={};
 function genTimersClear(){genTimers.forEach(function(x){clearInterval(x);clearTimeout(x)});genTimers=[]}
 function genRoot(){return genRootEl}
@@ -2828,6 +2828,190 @@ function genOpen(id){
  return true}
 function genMin(){var w=document.getElementById('genericWindow');if(w)w.classList.remove('active');if(genCur)taskbarState[genCur]='short';refreshTaskbar()}
 function genClose(){genTimersClear();var w=document.getElementById('genericWindow');if(w)w.classList.remove('active');if(genCur){delete taskbarState[genCur];genCur=null}refreshTaskbar()}
+/* ===== v10.7.11 個別作り込みアプリ (PRO) ===== */
+function proGet(id,defv){try{var v=JSON.parse(localStorage.getItem(K('pro_'+id))||'null');return v===null?defv:v}catch(e){return defv}}
+function proSet(id,v){try{localStorage.setItem(K('pro_'+id),JSON.stringify(v))}catch(e){}}
+function proYen(n){return '¥'+Math.round(n).toLocaleString()}
+function proInp(id,label,val,type,extra){return '<label style="font-size:12.5px;display:block">'+label+'<input class="inp" id="'+id+'" type="'+(type||'number')+'" step="any" value="'+val+'" style="width:100%;margin-top:3px" '+(extra||'')+'></label>'}
+/* --- 1. ローン返済プロ: 繰上返済シミュレーション+年次残高表+保存 --- */
+function proLoanRender(c,head){
+ var sv=proGet('loan',{a:3000000,b:1.5,c:35,e:0});
+ c.innerHTML=head+'<div style="display:flex;flex-direction:column;gap:8px">'
+ +proInp('pl_a','借入額(円)',sv.a)+proInp('pl_b','年利(%)',sv.b)+proInp('pl_c','返済年数(年)',sv.c)+proInp('pl_e','毎月の繰上返済額(円)',sv.e||0)
+ +'<button class="btn primary" onclick="proLoanCalc()">シミュレーションする</button>'
+ +'<div class="card" id="pl_result" style="line-height:1.9;font-size:13.5px">入力してボタンを押してください。前回の条件は自動で保存されます。</div>'
+ +'<div id="pl_table" style="max-height:240px;overflow-y:auto"></div></div>';
+}
+function proLoanSim(p,rate,years,extra){
+ var t=rate/100/12,n=Math.round(years*12),pay;
+ if(t<=0)pay=p/n;else pay=p*t/(1-Math.pow(1+t,-n));
+ var bal=p,months=0,totInt=0,yearly=[],yInt=0,yPrin=0;
+ while(bal>0.5&&months<n+600){
+  var intr=bal*t;var prin=Math.min(bal,pay-intr+extra);if(prin<=0)break;
+  bal-=prin;totInt+=intr;yInt+=intr;yPrin+=prin;months++;
+  if(months%12===0||bal<=0.5)yearly.push({y:Math.ceil(months/12),bal:Math.max(0,Math.round(bal)),prin:Math.round(yPrin),intr:Math.round(yInt),cum:Math.round(totInt)});
+ }
+ return {pay:pay,months:months,totInt:totInt,total:pay*0+ (p+totInt),yearly:yearly};
+}
+function proLoanCalc(){
+ var a=parseFloat((gq('#pl_a')||{}).value)||0,b=parseFloat((gq('#pl_b')||{}).value)||0,cc=parseFloat((gq('#pl_c')||{}).value)||0,e=parseFloat((gq('#pl_e')||{}).value)||0;
+ if(a<=0||cc<=0){genSetResult&&0;var r0=gq('#pl_result');if(r0)r0.textContent='借入額と年数を入れてください';return}
+ proSet('loan',{a:a,b:b,c:cc,e:e});
+ var base=proLoanSim(a,b,cc,0),withE=proLoanSim(a,b,cc,e);
+ var r=gq('#pl_result');
+ r.innerHTML='毎月返済(繰上なし): <b>'+proYen(base.pay)+'</b><br>'
+  +(e>0?('繰上あり: 完済まで <b>'+withE.months+'ヶ月</b>（'+Math.floor(withE.months/12)+'年'+(withE.months%12)+'ヶ月）で <b>'+(base.months-withE.months)+'ヶ月短縮</b><br>利息: '+proYen(withE.totInt)+'（繰上なし '+proYen(base.totInt)+' → <b>'+proYen(base.totInt-withE.totInt)+' 節約</b>）')
+        :('完済まで: <b>'+base.months+'ヶ月</b><br>利息合計: <b>'+proYen(base.totInt)+'</b> ・ 総返済: '+proYen(a+base.totInt)));
+ var sim=e>0?withE:base;
+ var tb=gq('#pl_table');
+ tb.innerHTML='<table style="width:100%;font-size:12px;border-collapse:collapse"><tr style="opacity:.6"><td>年</td><td style="text-align:right">残高</td><td style="text-align:right">元本(年)</td><td style="text-align:right">利息累計</td></tr>'
+  +sim.yearly.map(function(y){return '<tr style="border-top:1px solid rgba(127,127,127,.25)"><td>'+y.y+'年目</td><td style="text-align:right">'+proYen(y.bal)+'</td><td style="text-align:right">'+proYen(y.prin)+'</td><td style="text-align:right">'+proYen(y.cum)+'</td></tr>'}).join('')+'</table>';
+ beep(880,.06);
+}
+/* --- 2. 割り勘プロ: 立替精算（誰が誰にいくら払うか） --- */
+function proSplitRender(c,head){
+ c.innerHTML=head+'<div class="row"><input class="inp" id="ps_name" placeholder="名前" style="flex:1"><input class="inp" id="ps_paid" type="number" step="any" placeholder="立替えた金額(円)" style="flex:1.2"><button class="btn primary" onclick="proSplitAdd()">追加</button></div>'
+ +'<div style="font-size:11.5px;opacity:.6;margin:6px 0">立替えていない人は金額0で追加。全員分の精算（誰→誰に ¥いくら）を計算します。</div>'
+ +'<div id="ps_list"></div><div class="card" id="ps_result" style="margin-top:8px;line-height:1.9;font-size:13.5px"></div>';
+ proSplitCalc();
+}
+function proSplitAdd(){
+ var n=((gq('#ps_name')||{}).value||'').trim();var v=parseFloat((gq('#ps_paid')||{}).value)||0;
+ if(!n){toast('名前を入れてください','');return}
+ var a=proGet('splitbill',[]);a.push({name:n,paid:v});proSet('splitbill',a);proSplitCalc();beep(880,.06);
+}
+function proSplitDel(i){var a=proGet('splitbill',[]);a.splice(i,1);proSet('splitbill',a);proSplitCalc()}
+function proSplitCalc(){
+ var a=proGet('splitbill',[]);var li=gq('#ps_list'),rs=gq('#ps_result');if(!li||!rs)return;
+ li.innerHTML=a.length?a.map(function(m,i){return '<div class="kb-item"><span>'+escapeHtml(m.name)+'</span><span>立替 '+proYen(m.paid)+' <button class="btn sm" onclick="proSplitDel('+i+')">×</button></span></div>'}).join(''):'<div style="text-align:center;padding:12px;opacity:.4;font-size:12.5px">メンバーを追加してください</div>';
+ if(a.length<2){rs.innerHTML='2人以上追加すると精算を表示します';return}
+ var tot=a.reduce(function(s,m){return s+m.paid},0);
+ var base=Math.floor(tot/a.length),rem=tot-base*a.length;
+ var bal=a.map(function(m,i){var share=base+(i<rem?1:0);return {name:m.name,diff:m.paid-share}});
+ var debt=bal.filter(function(x){return x.diff<0}).map(function(x){return {name:x.name,amt:-x.diff}});
+ var cred=bal.filter(function(x){return x.diff>0}).map(function(x){return {name:x.name,amt:x.diff}});
+ var moves=[],i=0,j=0;
+ while(i<debt.length&&j<cred.length){var pay=Math.min(debt[i].amt,cred[j].amt);if(pay>0)moves.push(debt[i].name+' → '+cred[j].name+' : <b>'+proYen(pay)+'</b>');debt[i].amt-=pay;cred[j].amt-=pay;if(debt[i].amt<=0)i++;if(cred[j].amt<=0)j++}
+ rs.innerHTML='合計: <b>'+proYen(tot)+'</b> ・ 1人あたり: <b>'+proYen(tot/a.length)+'</b>（端数'+rem+'円は先頭から1円ずつ負担）<br>'
+  +(moves.length?('<b>精算:</b><br>'+moves.join('<br>')):'<b>精算不要</b>（全員同じだけ立替えています）');
+}
+/* --- 3. 睡眠サイクルプロ: モード切替+入眠時間+保存+昼寝タイマー --- */
+function proSleepRender(c,head){
+ var sv=proGet('sleepcycle',{time:'07:00',lat:14});
+ c.innerHTML=head+'<label style="font-size:12.5px;display:block">モード<select class="inp" id="sc_mode" style="width:100%;margin-top:3px"><option value="wake">起きたい時刻から、寝る時刻を出す</option><option value="sleep">寝る時刻から、起きる時刻を出す</option></select></label>'
+ +proInp('sc_time','時刻',sv.time,'time')+proInp('sc_lat','寝つくまでの時間(分)',sv.lat)
+ +'<button class="btn primary" style="width:100%;margin-top:8px" onclick="proSleepCalc()">計算する</button>'
+ +'<div class="row" style="margin-top:8px"><button class="btn" style="flex:1" onclick="proSleepNap(20)">💤 20分昼寝</button><button class="btn" style="flex:1" onclick="proSleepNap(90)">💤 90分昼寝(1サイクル)</button></div>'
+ +'<div class="card" id="sc_result" style="margin-top:8px;line-height:1.9;font-size:13.5px">90分サイクル×回数で候補を出します。5〜6サイクル（7.5〜9時間）がおすすめです。</div>';
+}
+function proSleepFmt(d){return ('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2)}
+function proSleepCalc(){
+ var mode=(gq('#sc_mode')||{}).value||'wake';var tv=(gq('#sc_time')||{}).value||'07:00';var lat=parseFloat((gq('#sc_lat')||{}).value)||0;
+ proSet('sleepcycle',{time:tv,lat:lat});
+ var p=tv.split(':');var base=new Date();base.setHours(+p[0]||0,+p[1]||0,0,0);
+ var rows='';
+ for(var cy=6;cy>=3;cy--){var d=new Date(base.getTime()+(mode==='wake'?-1:1)*(cy*90+ (mode==='wake'?lat:-lat))*60000);
+  var rec=cy>=5?' ⭐おすすめ':'';var hrs=(cy*90/60);
+  rows+=(mode==='wake'?'寝る ':'起きる ')+cy+'サイクル（'+hrs+'時間）: <b>'+proSleepFmt(d)+'</b>'+rec+'<br>'}
+ var r=gq('#sc_result');if(r)r.innerHTML=rows+'<span style="font-size:11.5px;opacity:.6">寝つくまでの '+lat+' 分を含めて計算しています</span>';
+ beep(880,.06);
+}
+function proSleepNap(min){var d=new Date(Date.now()+min*60000);var r=gq('#sc_result');if(r)r.innerHTML='今から寝ると、起きる目安は <b>'+proSleepFmt(d)+'</b>（'+min+'分後）です';beep(880,.06)}
+/* --- 4. 単位価格プロ: 最大で何品でも比較・ランキング・保存 --- */
+function proUnitRender(c,head){
+ c.innerHTML=head+'<div class="row"><input class="inp" id="pu_name" placeholder="商品名" style="flex:1.2"><input class="inp" id="pu_price" type="number" step="any" placeholder="価格(円)" style="flex:1"><input class="inp" id="pu_amt" type="number" step="any" placeholder="内容量" style="flex:1"><input class="inp" id="pu_unit" placeholder="単位(g等)" style="flex:.7"><button class="btn primary" onclick="proUnitAdd()">追加</button></div>'
+ +'<div style="font-size:11.5px;opacity:.6;margin:6px 0">同じ単位同士で比べます。100単位あたりの価格でランキングします。</div>'
+ +'<div id="pu_list"></div>';
+ proUnitCalc();
+}
+function proUnitAdd(){
+ var n=((gq('#pu_name')||{}).value||'').trim();var pr=parseFloat((gq('#pu_price')||{}).value);var am=parseFloat((gq('#pu_amt')||{}).value);var un=((gq('#pu_unit')||{}).value||'').trim()||'単位';
+ if(!n||!(pr>0)||!(am>0)){toast('商品名・価格・内容量を入れてください','');return}
+ var a=proGet('unitprice',[]);a.push({name:n,price:pr,amt:am,unit:un});proSet('unitprice',a);proUnitCalc();beep(880,.06);
+}
+function proUnitDel(i){var a=proGet('unitprice',[]);a.splice(i,1);proSet('unitprice',a);proUnitCalc()}
+function proUnitCalc(){
+ var a=proGet('unitprice',[]);var li=gq('#pu_list');if(!li)return;
+ if(!a.length){li.innerHTML='<div style="text-align:center;padding:12px;opacity:.4;font-size:12.5px">商品を追加してください</div>';return}
+ var sorted=a.map(function(x,i){return {x:x,i:i,per:x.price/x.amt*100}}).sort(function(p,q){return p.per-q.per});
+ var best=sorted[0].per;
+ li.innerHTML=sorted.map(function(s,rank){var diff=best>0?((s.per-best)/best*100):0;
+  return '<div class="kb-item"><span>'+(rank===0?'🏆 ':'')+escapeHtml(s.x.name)+'（'+s.x.amt+s.x.unit+' / '+proYen(s.x.price)+'）</span><span><b>100'+escapeHtml(s.x.unit)+'あたり '+proYen(s.per)+'</b>'+(rank===0?' 最安':' +'+diff.toFixed(1)+'%')+' <button class="btn sm" onclick="proUnitDel('+s.i+')">×</button></span></div>'}).join('');
+}
+/* --- 5. サブスク管理プロ: 次回請求日・月換算合計・カテゴリ --- */
+function proSubNext(day){
+ var now=new Date();var y=now.getFullYear(),m=now.getMonth();
+ var mk=function(yy,mm){var last=new Date(yy,mm+1,0).getDate();return new Date(yy,mm,Math.min(day,last))};
+ var d=mk(y,m);if(d<new Date(y,m,now.getDate()))d=mk(y,m+1);
+ return d;
+}
+function proSubRender(c,head){
+ c.innerHTML=head+'<div class="row"><input class="inp" id="sb_name" placeholder="サービス名" style="flex:1.2"><input class="inp" id="sb_price" type="number" step="any" placeholder="金額(円)" style="flex:1"><select class="inp" id="sb_cycle" style="flex:.8"><option value="m">月額</option><option value="y">年額</option></select><input class="inp" id="sb_day" type="number" placeholder="請求日" style="flex:.7"><button class="btn primary" onclick="proSubAdd()">追加</button></div>'
+ +'<div id="sb_stat"></div><div id="sb_list" style="margin-top:6px"></div>';
+ proSubCalc();
+}
+function proSubAdd(){
+ var n=((gq('#sb_name')||{}).value||'').trim();var pr=parseFloat((gq('#sb_price')||{}).value);var cy=(gq('#sb_cycle')||{}).value||'m';var day=Math.min(31,Math.max(1,parseInt((gq('#sb_day')||{}).value,10)||1));
+ if(!n||!(pr>0)){toast('サービス名と金額を入れてください','');return}
+ var a=proGet('recsubsc',[]);a.push({name:n,price:pr,cycle:cy,day:day});proSet('recsubsc',a);proSubCalc();beep(880,.06);
+}
+function proSubDel(i){var a=proGet('recsubsc',[]);a.splice(i,1);proSet('recsubsc',a);proSubCalc()}
+function proSubCalc(){
+ var a=proGet('recsubsc',[]);var st=gq('#sb_stat'),li=gq('#sb_list');if(!st||!li)return;
+ var monthly=a.reduce(function(s,x){return s+(x.cycle==='y'?x.price/12:x.price)},0);
+ st.innerHTML='<div class="card" style="line-height:1.9;font-size:13.5px">登録 <b>'+a.length+'</b> 件 ・ 月換算 <b>'+proYen(monthly)+'</b> ・ 年換算 <b>'+proYen(monthly*12)+'</b></div>';
+ var rows=a.map(function(x,i){var nx=proSubNext(x.day);var days=Math.round((nx-new Date(new Date().setHours(0,0,0,0)))/864e5);return {x:x,i:i,nx:nx,days:days}}).sort(function(p,q){return p.days-q.days});
+ li.innerHTML=a.length?rows.map(function(r){return '<div class="kb-item"><span>'+escapeHtml(r.x.name)+'（'+(r.x.cycle==='y'?'年額':'月額')+' '+proYen(r.x.price)+'）</span><span>次回 '+ (r.nx.getMonth()+1)+'/'+r.nx.getDate() +'（あと'+r.days+'日） <button class="btn sm" onclick="proSubDel('+r.i+')">×</button></span></div>'}).join(''):'<div style="text-align:center;padding:12px;opacity:.4;font-size:12.5px">サブスクを追加してください</div>';
+}
+/* --- 6. 冷蔵庫メモプロ: 賞味期限アラート・検索・在庫増減 --- */
+function proFridgeRender(c,head){
+ c.innerHTML=head+'<div class="row"><input class="inp" id="pf_name" placeholder="食材名" style="flex:1.2"><input class="inp" id="pf_qty" type="number" step="any" placeholder="個数" value="1" style="flex:.6"><input class="inp" id="pf_exp" type="date" style="flex:1;color-scheme:dark"><select class="inp" id="pf_place" style="flex:.8"><option>冷蔵</option><option>冷凍</option><option>常温</option></select><button class="btn primary" onclick="proFridgeAdd()">追加</button></div>'
+ +'<div class="row" style="margin-top:8px"><input class="inp" id="pf_search" placeholder="🔍 食材を検索" style="flex:1" oninput="proFridgeCalc()"><select class="inp" id="pf_filter" style="flex:.7" onchange="proFridgeCalc()"><option value="all">すべて</option><option value="soon">期限3日以内</option><option value="expired">期限切れ</option></select></div>'
+ +'<div id="pf_list" style="margin-top:6px"></div>';
+ var d=gq('#pf_exp');if(d)d.value=ymd();
+ proFridgeCalc();
+}
+function proFridgeAdd(){
+ var n=((gq('#pf_name')||{}).value||'').trim();var q=parseFloat((gq('#pf_qty')||{}).value)||1;var ex=(gq('#pf_exp')||{}).value||ymd();var pl=(gq('#pf_place')||{}).value||'冷蔵';
+ if(!n){toast('食材名を入れてください','');return}
+ var a=proGet('recfridge',[]);a.push({id:Date.now(),name:n,qty:q,exp:ex,place:pl});proSet('recfridge',a);proFridgeCalc();beep(880,.06);
+}
+function proFridgeDel(id){proSet('recfridge',proGet('recfridge',[]).filter(function(x){return x.id!==id}));proFridgeCalc()}
+function proFridgeQty(id,d){var a=proGet('recfridge',[]);a.forEach(function(x){if(x.id===id)x.qty=Math.max(0,x.qty+d)});proSet('recfridge',a);proFridgeCalc()}
+function proFridgeCalc(){
+ var a=proGet('recfridge',[]);var li=gq('#pf_list');if(!li)return;
+ var q=((gq('#pf_search')||{}).value||'').trim();var f=(gq('#pf_filter')||{}).value||'all';
+ var today=new Date(ymd()+'T00:00:00');
+ var rows=a.map(function(x){var days=Math.round((new Date(x.exp+'T00:00:00')-today)/864e5);return {x:x,days:days}}).sort(function(p,q2){return p.days-q2.days})
+  .filter(function(r){if(q&&r.x.name.indexOf(q)<0)return false;if(f==='soon')return r.days<=3&&r.days>=0;if(f==='expired')return r.days<0;return true});
+ li.innerHTML=rows.length?rows.map(function(r){var badge=r.days<0?'<b style="color:#ff7b7b">期限切れ'+(-r.days)+'日</b>':(r.days<=3?'<b style="color:#ffb35c">あと'+r.days+'日</b>':'あと'+r.days+'日');
+  return '<div class="kb-item"><span>'+escapeHtml(r.x.name)+'（'+escapeHtml(r.x.place)+'・'+r.x.exp.slice(5)+'まで）</span><span>'+badge+' <button class="btn sm" onclick="proFridgeQty('+r.x.id+',-1)">−</button> '+r.x.qty+' <button class="btn sm" onclick="proFridgeQty('+r.x.id+',1)">＋</button> <button class="btn sm" onclick="proFridgeDel('+r.x.id+')">×</button></span></div>'}).join(''):'<div style="text-align:center;padding:12px;opacity:.4;font-size:12.5px">表示する食材がありません</div>';
+}
+/* --- 7. 旅行チェックプロ: 自分で追加・進捗保存・一覧コピー --- */
+function proTravelItems(){var def=GEN_DEFS['chktravel'];var base=def&&def.items?def.items.slice():[];var sv=proGet('chktravel',{checked:{},custom:[]});return base.concat(sv.custom||[])}
+function proTravelRender(c,head){
+ c.innerHTML=head+'<div class="card" id="pt_stat" style="margin-bottom:8px"></div>'
+ +'<div class="row" style="margin-bottom:8px"><input class="inp" id="pt_new" placeholder="自分の持ち物を追加" style="flex:1"><button class="btn primary" onclick="proTravelAdd()">追加</button></div>'
+ +'<div id="pt_list"></div>'
+ +'<div class="row" style="margin-top:8px"><button class="btn sm" onclick="proTravelCopy()">📋 未チェックだけコピー</button><button class="btn sm" onclick="proTravelReset()">チェックをリセット</button></div>';
+ proTravelCalc();
+}
+function proTravelAdd(){var v=((gq('#pt_new')||{}).value||'').trim();if(!v)return;var sv=proGet('chktravel',{checked:{},custom:[]});sv.custom=sv.custom||[];sv.custom.push(v);proSet('chktravel',sv);proTravelCalc();beep(880,.06)}
+function proTravelToggle(i,on){var items=proTravelItems();var sv=proGet('chktravel',{checked:{},custom:[]});sv.checked=sv.checked||{};sv.checked[items[i]]=on;proSet('chktravel',sv);proTravelCalc()}
+function proTravelDelCustom(name){var sv=proGet('chktravel',{checked:{},custom:[]});sv.custom=(sv.custom||[]).filter(function(x){return x!==name});if(sv.checked)delete sv.checked[name];proSet('chktravel',sv);proTravelCalc()}
+function proTravelReset(){var sv=proGet('chktravel',{checked:{},custom:[]});sv.checked={};proSet('chktravel',sv);proTravelCalc()}
+function proTravelCopy(){var items=proTravelItems();var sv=proGet('chktravel',{checked:{},custom:[]});var left=items.filter(function(x){return !(sv.checked&&sv.checked[x])});
+ var txt=left.join('\n')||'全部チェック済みです';
+ if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(function(){toast('コピーしました','未チェック '+left.length+' 件')},function(){toast('コピーできませんでした','')});
+ else toast('コピーできませんでした','このブラウザは未対応です')}
+function proTravelCalc(){
+ var items=proTravelItems();var sv=proGet('chktravel',{checked:{},custom:[]});var chk=sv.checked||{};var custom=sv.custom||[];
+ var done=items.filter(function(x){return chk[x]}).length;var st=gq('#pt_stat'),li=gq('#pt_list');if(!st||!li)return;
+ st.innerHTML='進み具合: <b>'+done+' / '+items.length+'</b>（'+Math.round(done/items.length*100)+'%）<div class="tm-bar" style="margin-top:6px"><div style="width:'+(done/items.length*100)+'%"></div></div>'+(done===items.length?'<div style="margin-top:4px">🎉 準備完了！忘れ物なしで出発できます</div>':'');
+ li.innerHTML=items.map(function(it,i){var isC=custom.indexOf(it)>=0;return '<label class="card" style="display:flex;gap:9px;align-items:center;padding:10px 12px;margin-bottom:6px;cursor:pointer"><input type="checkbox" '+(chk[it]?'checked':'')+' onchange="proTravelToggle('+i+',this.checked)"><span style="flex:1">'+escapeHtml(it)+(isC?' <span style="opacity:.5;font-size:11px">(追加)</span>':'')+'</span>'+(isC?'<button class="btn sm" onclick="event.preventDefault();proTravelDelCustom(\''+escapeHtml(it).replace(/'/g,"\\'")+'\')">×</button>':'')+'</label>'}).join('');
+}
+var PRO_DEFS={'loan':proLoanRender,'splitbill':proSplitRender,'sleepcycle':proSleepRender,'unitprice':proUnitRender,'recsubsc':proSubRender,'recfridge':proFridgeRender,'chktravel':proTravelRender};
+
 function genRender(id,container){
  var def=window.GEN_DEFS&&GEN_DEFS[id];if(!def||!container)return;
  genRootEl=container;container.setAttribute('data-genroot','1');
@@ -2835,6 +3019,7 @@ function genRender(id,container){
  var ap=app(id),desc=ap?ap.desc:'';
  var head='<div style="font-size:12px;opacity:.65;margin-bottom:10px">'+desc+'</div>';
  var h=head;
+ if(window.PRO_DEFS&&PRO_DEFS[id]){PRO_DEFS[id](container,head);return}
  if(def.t==='calc'){
   h+='<div style="display:flex;flex-direction:column;gap:8px">';
   def.ins.forEach(function(f){var ty=f[3]||'num';
@@ -2959,7 +3144,7 @@ function genInit(id,def){
  else if(def.t==='conv')genConvRun(id);
 }
 
-/* ===== v10.7.10 ゲームエンジン ===== */
+/* ===== v10.7.11 ゲームエンジン ===== */
 function genGameBox(){return gq('#g_game')}
 function genInitGame(id,def){var m=def.mode;var st=genState[id];st.gscore=0;
  if(m==='sprint')genSprintInit(id,def);else if(m==='tap')genTapInit(id,def);else if(m==='memo')genMemoInit(id,def);
@@ -3834,7 +4019,7 @@ function updCheck(manual){
    if(fresh&&currentUser)ncAdd('アップデート','v'+j.version+' が利用できます。再起動して更新できます')}
   else if(manual)toast('最新バージョンです','v'+WARIRA_VERSION)
  }).catch(function(){if(manual)toast('更新を確認できませんでした','オフラインか更新情報がありません')})}
-/* ===== フィードバック (v10.7.10) ===== */
+/* ===== フィードバック (v10.7.11) ===== */
 var fbOpenAt={},fbAsked={};
 function fbOpened(id){if(id&&id!=='feedback')fbOpenAt[id]=Date.now()}
 function fbGet(){try{return JSON.parse(localStorage.getItem(K('feedback'))||'[]')}catch(e){return[]}}
@@ -5107,7 +5292,7 @@ var _errAt=0;window.addEventListener('error',function(e){var now=Date.now();if(n
 window.addEventListener('unhandledrejection',function(){var now=Date.now();if(now-_errAt<5000)return;_errAt=now;try{toast('エラーが発生しました','処理に失敗しました')}catch(_){}});
 bootSequence();
 
-/* ===== v10.7.10 新規: 家計簿 ===== */
+/* ===== v10.7.11 新規: 家計簿 ===== */
 function getKb(){try{return JSON.parse(localStorage.getItem(K('kakeibo'))||'[]')}catch(e){return[]}}
 function setKb(v){try{localStorage.setItem(K('kakeibo'),JSON.stringify(v))}catch(e){toast('保存できませんでした','容量がいっぱいです')}}
 function kbAdd(){var amt=parseInt(document.getElementById('kbAmt').value,10);if(!amt||amt<=0){toast('金額を入れてください','');return}
@@ -5119,7 +5304,7 @@ a.forEach(function(x){if(x.date.slice(0,7)!==mk)return;if(x.type==='in')inc+=x.a
 var kbmn=document.getElementById('kbMonthName');if(kbmn)kbmn.textContent=mk.replace('-','年')+'月';document.getElementById('kbBalance').textContent='¥'+(inc-out).toLocaleString();document.getElementById('kbIn').textContent='¥'+inc.toLocaleString();document.getElementById('kbOut').textContent='¥'+out.toLocaleString();
 document.getElementById('kbCats').innerHTML=Object.keys(cats).length?('<b>この月の支出内訳:</b> '+Object.keys(cats).map(function(k){return k+' ¥'+cats[k].toLocaleString()}).join(' / ')):'';
 var l=document.getElementById('kbList');l.innerHTML=a.length?a.slice(0,60).map(function(x){return '<div class="kb-item"><span>'+x.date.slice(5)+' ['+escapeHtml(x.cat)+'] '+escapeHtml(x.memo||'')+'</span><span style="color:'+(x.type==='in'?'#4ade80':'#f87171')+';font-weight:700">'+(x.type==='in'?'+':'-')+'¥'+x.amt.toLocaleString()+' <button class="btn sm" onclick="kbDel('+x.id+')">×</button></span></div>'}).join(''):'<div style="text-align:center;padding:16px;opacity:.4;font-size:12.5px">まだ記録がありません</div>'}
-/* ===== v10.7.10 新規: 読書記録 ===== */
+/* ===== v10.7.11 新規: 読書記録 ===== */
 var bkFilter='all';
 function getBk(){try{return JSON.parse(localStorage.getItem(K('books'))||'[]')}catch(e){return[]}}
 function setBk(v){try{localStorage.setItem(K('books'),JSON.stringify(v))}catch(e){}}
