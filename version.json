@@ -1,5 +1,5 @@
 {
-  "version": "10.7.29",
+  "version": "10.7.30",
   "file": "wariraos.html",
-  "notes": "v10.7.29: ダウンロード保存をOS内ファイルのみに変更（PCへは出さない）"
+  "notes": "v10.7.30: 3MB超のファイルはIndexedDBに保存（上限100MB）"
 }
