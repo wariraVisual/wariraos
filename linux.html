@@ -42,7 +42,7 @@ window.addEventListener('load', function () {
       cdrom: { url: 'linux.iso' },
       autostart: true
     });
-    emu.add_listener('emulator-ready', function () { st.textContent = '起動中…'; });
+    emu.add_listener('emulator-ready', function () { st.textContent = '起動中…'; setTimeout(function () { st.textContent = 'Linux実行中（画面をクリックすると入力できます）'; }, 20000); });
     emu.add_listener('screen-set-mode', function () { st.textContent = 'Linux実行中'; });
     window._emu = emu;
   } catch (e) {
