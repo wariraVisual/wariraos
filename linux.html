@@ -6,10 +6,14 @@
 <title>wariraOS Linux (v86)</title>
 <style>
   html,body{margin:0;height:100%;background:#000;color:#ddd;font-family:ui-monospace,Menlo,Consolas,monospace}
-  #bar{height:36px;display:flex;align-items:center;gap:12px;padding:0 10px;background:#111;border-bottom:1px solid #222;font-size:12px;box-sizing:border-box}
+  #bar{min-height:36px;display:flex;align-items:center;gap:10px;padding:4px 10px;background:#111;border-bottom:1px solid #222;font-size:12px;box-sizing:border-box;flex-wrap:wrap}
   #bar button{background:#222;color:#ddd;border:1px solid #333;border-radius:6px;padding:3px 10px;cursor:pointer;font-size:12px}
   #bar button:hover{background:#2c2c2c}
-  #screen{width:100%;height:calc(100% - 36px);overflow:hidden}
+  #cmds{display:flex;align-items:center;gap:6px;padding:5px 10px;background:#0b0b0b;border-bottom:1px solid #1c1c1c;flex-wrap:wrap}
+  #cmds button{background:#1a1a1a;color:#9fd0ff;border:1px solid #2a2a2a;border-radius:20px;padding:2px 10px;cursor:pointer;font-size:11.5px;font-family:inherit}
+  #cmds button:hover{background:#243447}
+  #cmds input{flex:1;min-width:140px;background:#111;color:#ddd;border:1px solid #2c2c2c;border-radius:6px;padding:4px 8px;font-size:12px;font-family:inherit}
+  #screen{width:100%;height:calc(100% - 78px);overflow:hidden}
   #screen>div{white-space:pre;font:14px ui-monospace,Menlo,Consolas,monospace;line-height:14px;color:#ddd}
   #screen canvas{display:none}
 </style>
@@ -20,19 +24,101 @@
   <span id="st">読み込み中…</span>
   <span style="flex:1"></span>
   <span style="opacity:.55">ログインを求められたら root</span>
-  <button onclick="location.reload()">再起動</button>
+  <button onclick="lxReboot()">再起動</button>
+  <button onclick="lxFresh()">最初から起動</button>
+</div>
+<div id="cmds">
+  <button onclick="lxCmd('ls')">ls</button>
+  <button onclick="lxCmd('ls -la')">ls -la</button>
+  <button onclick="lxCmd('pwd')">pwd</button>
+  <button onclick="lxCmd('uname -a')">uname -a</button>
+  <button onclick="lxCmd('free -m')">free -m</button>
+  <button onclick="lxCmd('df -h')">df -h</button>
+  <button onclick="lxCmd('date')">date</button>
+  <button onclick="lxCmd('clear')">clear</button>
+  <input id="cmdIn" placeholder="コマンドを入力して Enter（例: echo hello）">
+  <button onclick="lxSendInput()">送信</button>
 </div>
 <div id="screen"><div></div><canvas></canvas></div>
 <script src="https://cdn.jsdelivr.net/npm/v86@0.5.494/build/libv86.js"></script>
 <script>
+var STATE_VER = 3;
+var emu = null;
+var restored = false;
+function stSet(t) { document.getElementById('st').textContent = t; }
+function idbOpen() {
+  return new Promise(function (res, rej) {
+    var rq = indexedDB.open('warira-linux', 1);
+    rq.onupgradeneeded = function () { rq.result.createObjectStore('kv'); };
+    rq.onsuccess = function () { res(rq.result); };
+    rq.onerror = function () { rej(rq.error); };
+  });
+}
+function idbGet(key) {
+  return idbOpen().then(function (db) {
+    return new Promise(function (res, rej) {
+      var rq = db.transaction('kv').objectStore('kv').get(key);
+      rq.onsuccess = function () { res(rq.result); };
+      rq.onerror = function () { rej(rq.error); };
+    });
+  });
+}
+function idbSet(key, val) {
+  return idbOpen().then(function (db) {
+    return new Promise(function (res, rej) {
+      var rq = db.transaction('kv', 'readwrite').objectStore('kv').put(val, key);
+      rq.onsuccess = function () { res(); };
+      rq.onerror = function () { rej(rq.error); };
+    });
+  });
+}
+function idbDel(key) {
+  return idbOpen().then(function (db) {
+    return new Promise(function (res, rej) {
+      var rq = db.transaction('kv', 'readwrite').objectStore('kv').delete(key);
+      rq.onsuccess = function () { res(); };
+      rq.onerror = function () { rej(rq.error); };
+    });
+  });
+}
+function lxSave(silent) {
+  if (!emu) return Promise.resolve();
+  return emu.save_state().then(function (buf) {
+    return idbSet('boot', { ver: STATE_VER, buf: buf });
+  }).then(function () {
+    if (!silent) stSet('状態を保存しました（次回は高速起動）');
+  }).catch(function () {});
+}
+function lxReboot() {
+  lxSave(true).then(function () { location.reload(); });
+}
+function lxFresh() {
+  idbDel('boot').then(function () { location.reload(); }).catch(function () { location.reload(); });
+}
+function lxCmd(cmd) {
+  if (emu) { emu.keyboard_send_text(cmd + '\n'); }
+  var sc = document.getElementById('screen');
+  if (sc) sc.focus && sc.focus();
+}
+function lxSendInput() {
+  var inp = document.getElementById('cmdIn');
+  if (inp && inp.value) { lxCmd(inp.value); inp.value = ''; }
+}
+document.getElementById('cmdIn').addEventListener('keydown', function (e) {
+  if (e.key === 'Enter') lxSendInput();
+});
+window.addEventListener('error', function (e) {
+  stSet('エラー: ' + (e.message || '読み込み失敗'));
+  if (restored && !sessionStorage.getItem('warira_lx_fallback')) {
+    sessionStorage.setItem('warira_lx_fallback', '1');
+    idbDel('boot').then(function () { location.reload(); });
+  }
+}, true);
 window.addEventListener('load', function () {
-  var st = document.getElementById('st');
-  window.addEventListener('error', function (e) { st.textContent = 'エラー: ' + (e.message || '読み込み失敗'); }, true);
   var Starter = window.V86 || window.V86Starter;
-  if (!Starter) { st.textContent = 'v86の読み込みに失敗しました（ネット接続を確認してください）'; return; }
-  st.textContent = 'Linuxイメージを取得中…（約6.5MB）';
-  try {
-    var emu = new Starter({
+  if (!Starter) { stSet('v86の読み込みに失敗しました（ネット接続を確認してください）'); return; }
+  idbGet('boot').catch(function () { return null; }).then(function (rec) {
+    var cfg = {
       wasm_path: 'https://cdn.jsdelivr.net/npm/v86@0.5.494/build/v86.wasm',
       memory_size: 128 * 1024 * 1024,
       vga_memory_size: 8 * 1024 * 1024,
@@ -41,13 +127,33 @@ window.addEventListener('load', function () {
       vga_bios: { url: 'https://cdn.jsdelivr.net/gh/copy/v86@master/bios/vgabios.bin' },
       cdrom: { url: 'linux.iso' },
       autostart: true
-    });
-    emu.add_listener('emulator-ready', function () { st.textContent = '起動中…'; setTimeout(function () { st.textContent = 'Linux実行中（画面をクリックすると入力できます）'; }, 20000); });
-    emu.add_listener('screen-set-mode', function () { st.textContent = 'Linux実行中'; });
-    window._emu = emu;
-  } catch (e) {
-    st.textContent = '起動に失敗しました: ' + e.message;
-  }
+    };
+    if (rec && rec.ver === STATE_VER && rec.buf) {
+      cfg.initial_state = { buffer: rec.buf };
+      restored = true;
+      stSet('保存した状態から高速起動中…');
+    } else {
+      stSet('Linuxイメージを取得中…（約6.5MB）');
+    }
+    try {
+      emu = new Starter(cfg);
+      window._emu = emu;
+      emu.add_listener('emulator-ready', function () {
+        if (restored) {
+          stSet('Linux実行中（高速起動・画面をクリックすると入力できます）');
+        } else {
+          stSet('起動中…');
+          setTimeout(function () {
+            stSet('Linux実行中（画面をクリックすると入力できます）');
+            lxSave(true);
+          }, 40000);
+          setInterval(function () { lxSave(true); }, 180000);
+        }
+      });
+    } catch (e) {
+      stSet('起動に失敗しました: ' + e.message);
+    }
+  });
 });
 </script>
 </body>
